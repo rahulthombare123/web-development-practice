@@ -1,0 +1,218 @@
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(145deg, #f6f9fc 0%, #e9f2f9 100%);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem 1rem;
+    }
+
+    .container {
+      max-width: 1100px;
+      width: 100%;
+      background: rgba(255,255,255,0.5);
+      backdrop-filter: blur(4px);
+      border-radius: 3rem 3rem 2rem 2rem;
+      box-shadow: 0 20px 40px -12px rgba(0,20,40,0.3);
+      padding: 2.5rem 2rem;
+      border: 1px solid rgba(255,255,255,0.5);
+    }
+
+    h1 {
+      text-align: center;
+      font-weight: 600;
+      font-size: clamp(2rem, 6vw, 2.8rem);
+      letter-spacing: -0.02em;
+      color: #0b2b40;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 0 rgba(255,255,255,0.7);
+    }
+
+    .subhead {
+      text-align: center;
+      font-size: 1.2rem;
+      color: #1e4b62;
+      margin-bottom: 2.8rem;
+      border-bottom: 2px dashed #8fc1d9;
+      padding-bottom: 1rem;
+    }
+
+    /* ----- button grid ----- */
+    .button-collection {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem 1.5rem;
+      margin: 2rem 0 1rem;
+    }
+
+    /* ----- base button styles (all buttons) ----- */
+    .btn {
+      border: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      padding: 0.9rem 2.2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.25s ease-in-out;
+      box-shadow: 0 4px 8px rgba(0,20,30,0.15);
+      background: white;
+      color: #1d3b4c;
+      border: 2px solid transparent;
+      min-width: 160px;
+      letter-spacing: 0.3px;
+      will-change: transform, background, box-shadow, color;
+    }
+
+    /* ----- individual button styles (different hover behaviours) ----- */
+
+    /* 1️⃣ color change: background + text */
+    .btn-color-swap {
+      background: #1e3f5c;
+      color: white;
+      border-color: #16323f;
+    }
+    .btn-color-swap:hover {
+      background: #f3c26b;
+      color: #1e3f5c;
+      border-color: #e0a74f;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 20px -10px #b38b40;
+    }
+
+    /* 2️⃣ size scale (grow) */
+    .btn-grow {
+      background: #54a68d;
+      color: white;
+    }
+    .btn-grow:hover {
+      transform: scale(1.15);
+      background: #3e957b;
+      box-shadow: 0 18px 25px -8px #2a6d58;
+    }
+
+    /* 3️⃣ size scale (shrink) + subtle color */
+    .btn-shrink {
+      background: #d16b7c;
+      color: #fff0f0;
+    }
+    .btn-shrink:hover {
+      transform: scale(0.9);
+      background: #b24d5e;
+      color: white;
+      box-shadow: 0 6px 12px rgba(170, 60, 80, 0.5);
+    }
+
+    /* 4️⃣ border & text color change (no background shift) */
+    .btn-border-color {
+      background: transparent;
+      border: 3px solid #2b7c9b;
+      color: #1d5a73;
+      box-shadow: none;
+    }
+    .btn-border-color:hover {
+      border-color: #f09b4a;
+      color: #c5611e;
+      background: rgba(240, 155, 74, 0.05);
+      transform: scale(1.02);
+    }
+
+    /* 5️⃣ shadow & color change (size subtle) */
+    .btn-glow {
+      background: #5e4c7a;
+      color: #f1eaff;
+      box-shadow: 0 6px 0 #3a2c4f;
+    }
+    .btn-glow:hover {
+      background: #806ab3;
+      box-shadow: 0 10px 20px #aa9bcc, 0 4px 0 #4d3b68;
+      transform: translateY(-3px);
+    }
+
+    /* 6️⃣ size + color + rotate (playful) */
+    .btn-pop {
+      background: #e08f5a;
+      color: #2b2b2b;
+    }
+    .btn-pop:hover {
+      transform: scale(1.2) rotate(2deg);
+      background: #f7ac6c;
+      color: #1f1f1f;
+      box-shadow: 0 25px 30px -12px #b95f2c;
+    }
+
+    /* 7️⃣ invert colors + slight grow */
+    .btn-invert {
+      background: #222222;
+      color: #eeeeee;
+      border: 2px solid #eeeeee;
+    }
+    .btn-invert:hover {
+      background: #eeeeee;
+      color: #222222;
+      border-color: #222222;
+      transform: scale(1.05);
+    }
+
+    /* 8️⃣ width expansion (size change horizontally) */
+    .btn-stretch {
+      background: #3f7e7c;
+      color: white;
+      border-radius: 30px;
+      padding: 0.9rem 2.2rem;
+    }
+    .btn-stretch:hover {
+      padding-left: 3rem;
+      padding-right: 3rem;
+      background: #2c6a68;
+      letter-spacing: 1.5px;
+    }
+
+    /* 9️⃣ button that changes background and becomes larger */
+    .btn-vibrant {
+      background: #c44545;
+      color: #ffe9e9;
+    }
+    .btn-vibrant:hover {
+      background: #eb7a7a;
+      transform: scale(1.1);
+      box-shadow: 0 0 0 3px rgba(235, 122, 122, 0.4);
+    }
+
+    /* 🔟 extra: color swap and border radius change (size variation) */
+    .btn-morph {
+      background: #3f6e8c;
+      color: white;
+      border-radius: 12px;
+    }
+    .btn-morph:hover {
+      background: #dba967;
+      color: #1f3f4f;
+      border-radius: 40px;
+      transform: scale(1.05);
+    }
+
+    /* simple footer */
+    .footer-note {
+      margin-top: 3rem;
+      text-align: center;
+      color: #2a5268;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    /* responsive tweaks */
+    @media (max-width: 600px) {
+      .container { padding: 2rem 1rem; }
+      .btn { min-width: 140px; padding: 0.8rem 1.2rem; }
+    }
+ 
