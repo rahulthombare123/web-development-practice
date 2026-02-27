@@ -32,11 +32,9 @@ Perfect for spicing up any web project — no JavaScript required.
 | `btn-vibrant`     | scale + background change + outline glow   |
 | `btn-morph`       | border radius morph + color swap           |
 
-## 📂 Files
 
-- `index.html` – complete demo page
-- `README.md` – you're reading it
 
 ## 📄 License
+
 
 Feel free to use this project for personal or commercial purposes.
