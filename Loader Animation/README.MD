@@ -33,3 +33,6 @@ A clean, modern, and fully responsive loading animation built with pure HTML and
 - **Container**: Remove or tweak the `backdrop-filter` and `background` of `.loader-container` for a different look.
 
 
+---
+
+Feel free to ⭐ star this repository if you find it useful!
