@@ -171,3 +171,24 @@ body{
     font-size: 26px;
     padding: 2px;
 }
+
+.product-d-purchase .gap{
+    margin: 15px 0;
+
+}
+
+.product-d-purchase p span{
+    color: #007185;
+}
+
+.delivery-location{
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.product-stock{
+    margin: 15px;
+    color: green;
+    font-weight: 400;
+}
