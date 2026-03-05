@@ -192,3 +192,12 @@ body{
     color: green;
     font-weight: 400;
 }
+
+.product-quantity{
+    padding: 8px 5px;
+    outline: none;
+    width: 100%;
+    border-radius: 5px;
+    background-color: #efefef;
+    border-color: #c1c1c1;    
+}
