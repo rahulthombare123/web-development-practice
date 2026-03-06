@@ -1,0 +1,90 @@
+* {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', 'Segoe UI', system-ui, monospace;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(145deg, #0b1120 0%, #1a2639 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .clock-card {
+      background: rgba(18, 28, 46, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 3.5rem;
+      box-shadow: 0 30px 50px -15px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      padding: 3rem 2.8rem;
+      max-width: 680px;
+      width: 100%;
+      transition: box-shadow 0.2s;
+    }
+
+    .clock-card:hover {
+      box-shadow: 0 35px 60px -15px #000000cc;
+    }
+
+    /* time display */
+    .time {
+      font-size: clamp(3.2rem, 16vw, 5.5rem);
+      font-weight: 600;
+      letter-spacing: 6px;
+      color: #e3e9ff;
+      text-shadow: 0 0 8px #60a5fa66, 0 0 20px #2563eb40;
+      line-height: 1.2;
+      text-align: center;
+      font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      margin-bottom: 0.6rem;
+    }
+
+    /* date display */
+    .date {
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      color: #94a3b8;
+      text-align: center;
+      text-transform: uppercase;
+      font-weight: 400;
+      border-top: 1px dashed #334155;
+      padding-top: 1.5rem;
+      margin-top: 1rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* small seconds indicator / label */
+    .label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: #60a5fa;
+      font-weight: 300;
+      margin-bottom: 0.8rem;
+    }
+
+    .label span {
+      background: #1e293b;
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      letter-spacing: 1.5px;
+      color: #b9c9f0;
+      border: 1px solid #3b4e6b;
+    }
+
+    .footer-note {
+      text-align: center;
+      color: #4b5876;
+      font-size: 0.85rem;
+      margin-top: 2rem;
+      font-style: italic;
+      border-bottom: 1px dotted #2d374b;
+      padding-bottom: 0.5rem;
+    }
