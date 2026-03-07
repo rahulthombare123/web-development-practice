@@ -6,22 +6,25 @@
     <title>live digital clock</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
-<div class="clock-card">
+<body id="mainBody">
+  <div class="clock-card">
     <div class="label">
-      <span>UTC+2 · CET</span>   <!-- just a label, time is local but we don't enforce zone -->
+      <span>UTC+2 · CET</span>
     </div>
 
-    <!-- time will be injected here by js -->
     <div class="time" id="time">--:--:--</div>
-
-    <!-- date element -->
     <div class="date" id="date">--- --- -- ----</div>
 
-    <div class="footer-note">Made with ❤️ by Rahul</div>
-  </div>
+    <!-- background switcher buttons -->
+    <div class="bg-panel">
+      <button class="bg-btn" data-bg="dark">🌙 dark</button>
+      <button class="bg-btn" data-bg="ocean">🌊 ocean</button>
+      <button class="bg-btn" data-bg="sunset">🌅 sunset</button>
+      <button class="bg-btn" data-bg="forest">🌲 forest</button>
+    </div>
 
+    <div class="footer-note">⚡ live refresh · tap to change background</div>
+  </div>
 
     <script src="script.js"></script>
 </body>
