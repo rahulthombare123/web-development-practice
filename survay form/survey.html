@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Survey Form</title>
+    
+
+</head>
+<body>
+    <div class="survey-container">
+        <h1>Customer Satisfaction Survey</h1>
+        <p class="description">We'd love to hear your feedback to improve our services</p>
+        
+        <form action="#" method="post">
+            <!-- Text Input: Full Name -->
+            <div class="form-group">
+                <label for="name">Full Name <span style="color: red;">*</span></label>
+                <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+                <span class="hint">Please enter your first and last name</span>
+            </div>
+            
+            <!-- Email Input -->
+            <div class="form-group">
+                <label for="email">Email Address <span style="color: red;">*</span></label>
+                <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                <span class="hint">We'll never share your email with anyone</span>
+            </div>
+            
+            <!-- Number Input with restrictions -->
+            <div class="form-group">
+                <label for="age">Age <span style="color: red;">*</span></label>
+                <input type="number" id="age" name="age" min="1" max="120" placeholder="Enter your age" required>
+            </div>
+            
+            <!-- Dropdown Select -->
+            <div class="form-group">
+                <label for="how-heard">How did you hear about us?</label>
+                <select id="how-heard" name="how-heard">
+                    <option value="">-- Please choose an option --</option>
+                    <option value="social">Social Media</option>
+                    <option value="friend">Friend or Family</option>
+                    <option value="ad">Advertisement</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            
+            <!-- Radio Buttons (only one choice) -->
+            <div class="form-group">
+                <label>How would you rate our service? <span style="color: red;">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="excellent" name="rating" value="excellent" required>
+                        <label for="excellent">Excellent</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="good" name="rating" value="good">
+                        <label for="good">Good</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="average" name="rating" value="average">
+                        <label for="average">Average</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="poor" name="rating" value="poor">
+                        <label for="poor">Poor</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Checkboxes (multiple choices allowed) -->
+            <div class="form-group">
+                <label>Which features did you use? (Select all that apply)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature1" name="features" value="web">
+                        <label for="feature1">Website</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature2" name="features" value="mobile">
+                        <label for="feature2">Mobile App</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature3" name="features" value="customer">
+                        <label for="feature3">Customer Support</label>
+                    </div>
+                    <div class="checkbox-option">
+                        <input type="checkbox" id="feature4" name="features" value="billing">
+                        <label for="feature4">Billing</label>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Textarea for comments -->
+            <div class="form-group">
+                <label for="comments">Additional Comments or Suggestions</label>
+                <textarea id="comments" name="comments" placeholder="Tell us what you think..."></textarea>
+                <span class="hint">Your feedback helps us improve</span>
+            </div>
+            
+            <!-- Submit Button -->
+            <button type="submit" class="submit-btn">Submit Survey</button>
+        </form>
+    </div>
+</body>
+</html>
