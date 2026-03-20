@@ -3,7 +3,7 @@
 A clean, modern, and fully interactive todo list application built with HTML, CSS, and JavaScript. It helps you manage daily tasks with ease — add, edit, delete, complete, and filter tasks. All your data is saved locally in the browser.
 
 ## 🔗 Live Demo
-👉 https://rahulthombare123.github.io/web-development-practice/ToDo-list/
+👉 https://rahulthombare123.github.io/web-development-practice/ToDo-list
 
 ## 🚀 Features
 
