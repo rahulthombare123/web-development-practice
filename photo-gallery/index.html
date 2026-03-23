@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Photo Gallery</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <h1 class="logo">📷 PhotoGallery</h1>
+      <p class="tagline">Moments Captured Forever</p>
+    </div>
+  </header>
+
+  <!-- FILTER BUTTONS -->
+  <section class="filter-section">
+    <div class="filter-buttons">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="nature">Nature</button>
+      <button class="filter-btn" data-filter="city">City</button>
+      <button class="filter-btn" data-filter="animals">Animals</button>
+      <button class="filter-btn" data-filter="food">Food</button>
+    </div>
+  </section>
+
+  <!-- SEARCH BAR -->
+  <section class="search-section">
+    <input type="text" class="search-input" id="searchInput" placeholder="🔍 Search photos..." />
+  </section>
+
+  <!-- PHOTO GRID -->
+  <main class="gallery-grid" id="galleryGrid">
+
+    <div class="card" data-category="nature">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/forest/400/300" alt="Forest" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/forest/900/600" data-title="Forest" data-cat="Nature">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Forest Path</span>
+        <span class="card-tag nature">Nature</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="city">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/city1/400/300" alt="City" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/city1/900/600" data-title="City Lights" data-cat="City">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">City Lights</span>
+        <span class="card-tag city">City</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="animals">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/dog1/400/300" alt="Dog" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/dog1/900/600" data-title="Playful Dog" data-cat="Animals">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Playful Dog</span>
+        <span class="card-tag animals">Animals</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="food">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/food1/400/300" alt="Food" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/food1/900/600" data-title="Delicious Meal" data-cat="Food">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Delicious Meal</span>
+        <span class="card-tag food">Food</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="nature">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/mountain/400/300" alt="Mountain" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/mountain/900/600" data-title="Mountain Peak" data-cat="Nature">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Mountain Peak</span>
+        <span class="card-tag nature">Nature</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="city">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/street/400/300" alt="Street" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/street/900/600" data-title="Street Life" data-cat="City">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Street Life</span>
+        <span class="card-tag city">City</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="animals">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/cat2/400/300" alt="Cat" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/cat2/900/600" data-title="Sleepy Cat" data-cat="Animals">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Sleepy Cat</span>
+        <span class="card-tag animals">Animals</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="food">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/pizza/400/300" alt="Pizza" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/pizza/900/600" data-title="Fresh Pizza" data-cat="Food">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Fresh Pizza</span>
+        <span class="card-tag food">Food</span>
+      </div>
+    </div>
+
+    <div class="card" data-category="nature">
+      <div class="card-img-wrap">
+        <img src="https://picsum.photos/seed/ocean/400/300" alt="Ocean" class="card-img" />
+        <div class="card-overlay">
+          <button class="view-btn" data-img="https://picsum.photos/seed/ocean/900/600" data-title="Ocean Waves" data-cat="Nature">View</button>
+        </div>
+      </div>
+      <div class="card-info">
+        <span class="card-title">Ocean Waves</span>
+        <span class="card-tag nature">Nature</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- NO RESULTS MESSAGE -->
+  <div class="no-results" id="noResults">😔 No photos found</div>
+
+  <!-- LIGHTBOX MODAL -->
+  <div class="lightbox" id="lightbox">
+    <div class="lightbox-overlay" id="lightboxOverlay"></div>
+    <div class="lightbox-content">
+      <button class="close-btn" id="closeBtn">✕</button>
+      <img src="" alt="" class="lightbox-img" id="lightboxImg" />
+      <div class="lightbox-meta">
+        <span class="lightbox-title" id="lightboxTitle"></span>
+        <span class="lightbox-cat" id="lightboxCat"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>Made with ❤️ | Photo Gallery Project</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
