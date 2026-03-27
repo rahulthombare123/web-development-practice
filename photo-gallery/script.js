@@ -18,7 +18,7 @@ const lightboxCat   = document.getElementById('lightboxCat');
 const closeBtn      = document.getElementById('closeBtn');
 const viewBtns      = document.querySelectorAll('.view-btn');
 
-// --- Current Filter State ---
+// --- Current Filter State ----
 let activeFilter = 'all';
 let searchQuery  = '';
 
@@ -57,7 +57,7 @@ function filterCards() {
 }
 
 // =============================
-//   FILTER BUTTONS CLICK
+//   FILTER BUTTONS CLICK-
 // =============================
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
