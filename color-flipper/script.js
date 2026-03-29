@@ -5,7 +5,7 @@
             const flipBtn = document.getElementById('flipBtn');
             const copyBtn = document.getElementById('copyBtn');
 
-            // Function to generate random hex color
+            // Function to generate random hexa color
             function randomHexColor() {
                 const hex = Math.floor(Math.random() * 16777215).toString(16).padStart(6, '0');
                 return `#${hex}`;
