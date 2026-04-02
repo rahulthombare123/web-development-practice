@@ -53,7 +53,7 @@ No build steps, no dependencies — just open and use.
 
 ## 🧠 Local Storage
 
-All tasks are saved in `localStorage` under the key `todo_list_app`.  
+All tasks are saved in `localStorage` under the key `todo_list_app`..  
 Even after closing the browser, your tasks will be there when you return.
 
 ## 🎨 Customization
