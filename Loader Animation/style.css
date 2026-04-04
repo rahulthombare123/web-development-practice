@@ -26,7 +26,7 @@ body {
         }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 .loading-text {
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             font-weight: 600;
             color: #2c3e50;
             animation: pulse 1.5s ease-in-out infinite;
