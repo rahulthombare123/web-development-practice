@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rahul Thombare — Frontend Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<!-- EmailJS for chatbot -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<style>
+/* ============================================================
+   CONFIG — Change these values to personalize
+   ============================================================ */
+:root {
+  --name: "Rahul Thombare";
+  /* THEME */
+  --bg:        #050810;
+  --bg2:       #0a0f1e;
+  --card:      rgba(255,255,255,0.035);
+  --card-b:    rgba(255,255,255,0.08);
+  --text:      #e8eaf6;
+  --muted:     #7b84a3;
+  --accent1:   #6c63ff;
+  --accent2:   #00d4ff;
+  --accent3:   #ff6b9d;
+  --glow1:     rgba(108,99,255,0.35);
+  --glow2:     rgba(0,212,255,0.25);
+  --r:         16px;
+  --font-head: 'Syne', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+/* ============================================================ RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  overflow-x:hidden;
+  line-height:1.6;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{cursor:pointer;border:none;background:none;font:inherit;color:inherit}
+
+/* ============================================================ NOISE OVERLAY */
+body::before{
+  content:'';
+  position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:0.03;
+  pointer-events:none;
+  z-index:9999;
+}
+
+/* ============================================================ SCROLLBAR */
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent1);border-radius:4px}
+
+/* ============================================================ NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:1rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(5,8,16,0.7);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.06);
+  transition:all 0.3s;
+}
+.nav-logo{
+  font-family:var(--font-head);
+  font-weight:800;font-size:1.3rem;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:2rem;list-style:none}
+.nav-links a{
+  font-size:0.88rem;font-weight:500;color:var(--muted);
+  transition:color 0.2s;position:relative;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent1),var(--accent2));
+  transform:scaleX(0);transition:transform 0.3s;border-radius:2px;
+}
+.nav-links a:hover{color:var(--text)}
+.nav-links a:hover::after{transform:scaleX(1)}
+.nav-cta{
+  padding:0.5rem 1.25rem;border-radius:50px;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  font-size:0.85rem;font-weight:600;
+  transition:opacity 0.2s,transform 0.2s;
+}
+.nav-cta:hover{opacity:0.85;transform:translateY(-1px)}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer}
+.hamburger span{width:24px;height:2px;background:var(--text);border-radius:2px;transition:all 0.3s}
+
+/* ============================================================ HERO */
+#hero{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  position:relative;padding:8rem 2rem 4rem;text-align:center;
+  overflow:hidden;
+}
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  word-break: keep-all;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,rgba(108,99,255,0.22),transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%,rgba(0,212,255,0.14),transparent),
+    radial-gradient(ellipse 50% 50% at 20% 80%,rgba(255,107,157,0.12),transparent);
+  animation:pulse-bg 8s ease-in-out infinite alternate;
+}
+@keyframes pulse-bg{
+  0%{opacity:1}100%{opacity:0.7}
+}
+.hero-grid{
+  position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);
+}
+.hero-content{position:relative;z-index:2;max-width:800px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.4rem 1.1rem;border-radius:50px;margin-bottom:1.5rem;
+  border:1px solid rgba(108,99,255,0.4);
+  background:rgba(108,99,255,0.1);
+  font-size:0.8rem;font-weight:600;letter-spacing:0.08em;
+  color:var(--accent2);text-transform:uppercase;
+}
+.hero-badge span{width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:blink 1.2s ease-in-out infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.3}}
+.hero-name{
+  font-family:var(--font-head);
+  font-size:clamp(3rem,9vw,7rem);
+  font-weight:800;line-height:1.0;
+  background:linear-gradient(135deg,#fff 0%,var(--accent2) 50%,var(--accent1) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:0.5rem;
+  animation:fadeUp 0.9s ease both;
+}
+.hero-title{
+  font-family:var(--font-head);
+  font-size:clamp(1.1rem,3vw,1.6rem);
+  font-weight:600;color:var(--muted);
+  margin-bottom:1.5rem;
+  animation:fadeUp 0.9s 0.15s ease both;
+}
+.hero-title strong{color:var(--accent2)}
+.hero-desc{
+  font-size:1.05rem;color:var(--muted);max-width:520px;margin:0 auto 2.5rem;
+  animation:fadeUp 0.9s 0.25s ease both;
+}
+.hero-btns{
+  display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;
+  animation:fadeUp 0.9s 0.35s ease both;
+}
+.btn-primary{
+  padding:0.9rem 2.2rem;border-radius:50px;font-weight:600;font-size:0.95rem;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  color:#fff;transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 30px rgba(108,99,255,0.3);
+}
+.btn-primary:hover{transform:translateY(-3px);box-shadow:0 8px 40px rgba(108,99,255,0.5)}
+.btn-outline{
+  padding:0.9rem 2.2rem;border-radius:50px;font-weight:600;font-size:0.95rem;
+  border:1px solid rgba(255,255,255,0.2);color:var(--text);
+  transition:border-color 0.2s,background 0.2s,transform 0.2s;
+}
+.btn-outline:hover{border-color:var(--accent1);background:rgba(108,99,255,0.1);transform:translateY(-3px)}
+.hero-scroll{
+  position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);
+  display:flex;flex-direction:column;align-items:center;gap:0.5rem;
+  color:var(--muted);font-size:0.75rem;letter-spacing:0.1em;text-transform:uppercase;
+  animation:fadeIn 1.5s 1s both;
+}
+.scroll-line{width:1px;height:40px;background:linear-gradient(var(--accent1),transparent);animation:scroll-drop 1.5s ease-in-out infinite}
+@keyframes scroll-drop{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+/* ============================================================ SECTION COMMONS */
+section{padding:6rem 2rem}
+.section-inner{max-width:1100px;margin:0 auto}
+.section-label{
+  font-size:0.75rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+  color:var(--accent1);margin-bottom:0.6rem;display:flex;align-items:center;gap:0.5rem;
+}
+.section-label::before{content:'';width:24px;height:2px;background:var(--accent1);border-radius:2px}
+.section-title{
+  font-family:var(--font-head);font-size:clamp(2rem,5vw,3rem);font-weight:800;
+  line-height:1.1;margin-bottom:1.2rem;
+}
+.section-title span{
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.section-sub{color:var(--muted);max-width:500px;font-size:1rem}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity 0.7s ease,transform 0.7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ============================================================ ABOUT */
+#about{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;margin-top:3rem}
+.about-avatar-wrap{position:relative;display:flex;justify-content:center}
+.avatar-ring{
+  width:260px;height:260px;border-radius:50%;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2),var(--accent3));
+  padding:3px;animation:spin-slow 8s linear infinite;
+}
+@keyframes spin-slow{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+.avatar-inner{
+  width:100%;height:100%;border-radius:50%;
+  background:var(--bg2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-head);font-size:5rem;font-weight:800;
+  background:linear-gradient(135deg,var(--bg2),#0e1428);
+}
+.avatar-glow{
+  position:absolute;inset:-20px;border-radius:50%;
+  background:radial-gradient(circle,rgba(108,99,255,0.25),transparent 70%);
+  pointer-events:none;
+}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.stat-card{
+  background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);
+  padding:1.2rem;text-align:center;
+}
+.stat-num{font-family:var(--font-head);font-size:2rem;font-weight:800;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-label{font-size:0.8rem;color:var(--muted);margin-top:0.2rem}
+.about-text p{color:var(--muted);margin-bottom:1rem;font-size:1rem;line-height:1.8}
+.about-text p strong{color:var(--text)}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem}
+.tag{
+  padding:0.3rem 0.9rem;border-radius:50px;font-size:0.78rem;font-weight:600;
+  border:1px solid rgba(108,99,255,0.35);background:rgba(108,99,255,0.1);
+  color:var(--accent2);
+}
+
+/* ============================================================ SKILLS MARQUEE */
+#skills{overflow:hidden;padding:5rem 0}
+.skills-header{text-align:center;padding:0 2rem;margin-bottom:3rem}
+.marquee-wrap{position:relative}
+.marquee-wrap::before,.marquee-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;
+}
+.marquee-wrap::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+.marquee-wrap::after{right:0;background:linear-gradient(-90deg,var(--bg),transparent)}
+.marquee-track{
+  display:flex;gap:1.5rem;
+  animation:marquee-left 30s linear infinite;
+  width:max-content;padding:1rem 0;
+}
+.marquee-track2{
+  display:flex;gap:1.5rem;
+  animation:marquee-left 22s linear infinite reverse;
+  width:max-content;padding:1rem 0;margin-top:0.5rem;
+}
+@keyframes marquee-left{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.skill-chip{
+  display:flex;align-items:center;gap:0.75rem;
+  padding:0.8rem 1.4rem;border-radius:50px;
+  background:var(--card);border:1px solid var(--card-b);
+  white-space:nowrap;
+  transition:border-color 0.3s,background 0.3s;
+  font-size:0.9rem;font-weight:600;
+}
+.skill-chip:hover{border-color:var(--accent1);background:rgba(108,99,255,0.1)}
+.skill-chip img,.skill-chip svg{width:22px;height:22px;object-fit:contain;flex-shrink:0}
+
+/* ============================================================ PROJECTS */
+#projects{background:var(--bg2)}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem;margin-top:3rem}
+.project-card{
+  background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);
+  overflow:hidden;transition:transform 0.3s,border-color 0.3s,box-shadow 0.3s;
+  position:relative;
+}
+.project-card:hover{
+  transform:translateY(-8px);
+  border-color:rgba(108,99,255,0.5);
+  box-shadow:0 20px 60px rgba(108,99,255,0.15);
+}
+.project-img{
+  height:200px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;
+  position:relative;overflow:hidden;
+}
+.project-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(to bottom,transparent 50%,rgba(5,8,16,0.9));
+}
+.project-body{padding:1.5rem}
+.project-tags{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:0.8rem}
+.project-tag{
+  padding:0.2rem 0.7rem;border-radius:50px;font-size:0.7rem;font-weight:600;
+  background:rgba(0,212,255,0.1);color:var(--accent2);border:1px solid rgba(0,212,255,0.25);
+}
+.project-name{font-family:var(--font-head);font-size:1.25rem;font-weight:700;margin-bottom:0.5rem}
+.project-desc{color:var(--muted);font-size:0.88rem;line-height:1.6;margin-bottom:1.2rem}
+.project-links{display:flex;gap:0.75rem}
+.project-link{
+  display:flex;align-items:center;gap:0.4rem;
+  padding:0.45rem 1rem;border-radius:50px;font-size:0.8rem;font-weight:600;
+  border:1px solid var(--card-b);transition:all 0.2s;
+}
+.project-link:hover{border-color:var(--accent1);color:var(--accent2)}
+.project-link.live{
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  border-color:transparent;color:#fff;
+}
+.featured-badge{
+  position:absolute;top:1rem;right:1rem;z-index:2;
+  padding:0.25rem 0.7rem;border-radius:50px;font-size:0.7rem;font-weight:700;
+  background:linear-gradient(135deg,var(--accent3),var(--accent1));color:#fff;
+}
+
+/* ============================================================ GITHUB */
+#github{text-align:center}
+.github-card{
+  background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);
+  padding:2.5rem;margin-top:3rem;
+  display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:center;
+}
+.github-left{text-align:left}
+.github-username{
+  font-family:var(--font-head);font-size:1.8rem;font-weight:800;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  margin-bottom:0.5rem;
+}
+.github-desc{color:var(--muted);font-size:0.9rem;margin-bottom:1.5rem}
+.github-stats{display:flex;gap:1.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.gh-stat{text-align:center}
+.gh-stat-num{font-family:var(--font-head);font-size:1.5rem;font-weight:800;color:var(--accent2)}
+.gh-stat-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em}
+.github-right{overflow:hidden;border-radius:12px}
+.github-right img{width:100%;border-radius:12px;filter:brightness(0.9) saturate(1.3) hue-rotate(20deg)}
+.github-contrib-link{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.7rem 1.6rem;border-radius:50px;font-weight:600;font-size:0.88rem;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));color:#fff;
+  transition:transform 0.2s,box-shadow 0.2s;
+  box-shadow:0 0 20px rgba(108,99,255,0.3);
+}
+.github-contrib-link:hover{transform:translateY(-2px);box-shadow:0 6px 30px rgba(108,99,255,0.5)}
+
+/* ============================================================ CONTACT */
+#contact{background:var(--bg2)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;margin-top:3rem;align-items:start}
+.contact-links{display:flex;flex-direction:column;gap:1rem}
+.contact-link-card{
+  display:flex;align-items:center;gap:1rem;
+  padding:1.2rem 1.5rem;border-radius:var(--r);
+  background:var(--card);border:1px solid var(--card-b);
+  transition:border-color 0.2s,transform 0.2s,background 0.2s;
+}
+.contact-link-card:hover{border-color:var(--accent1);transform:translateX(6px);background:rgba(108,99,255,0.07)}
+.contact-icon{
+  width:44px;height:44px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-size:1.2rem;
+}
+.contact-info{}
+.contact-info-label{font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.1em;font-weight:600}
+.contact-info-val{font-weight:600;font-size:0.95rem;color:var(--text)}
+
+/* ============================================================ CHATBOT */
+.chatbot-wrap{
+  background:var(--card);border:1px solid var(--card-b);border-radius:var(--r);
+  overflow:hidden;display:flex;flex-direction:column;height:480px;
+}
+.chat-header{
+  padding:1rem 1.4rem;
+  background:linear-gradient(135deg,rgba(108,99,255,0.2),rgba(0,212,255,0.1));
+  border-bottom:1px solid var(--card-b);
+  display:flex;align-items:center;gap:0.75rem;
+}
+.chat-dot{width:10px;height:10px;border-radius:50%;background:#3ddc84;animation:blink 1.5s ease-in-out infinite}
+.chat-title{font-weight:700;font-size:0.95rem}
+.chat-sub{font-size:0.72rem;color:var(--muted)}
+.chat-messages{
+  flex:1;overflow-y:auto;padding:1.2rem;
+  display:flex;flex-direction:column;gap:0.8rem;
+}
+.chat-messages::-webkit-scrollbar{width:3px}
+.chat-messages::-webkit-scrollbar-thumb{background:var(--accent1)}
+.msg{max-width:80%;padding:0.75rem 1rem;border-radius:12px;font-size:0.88rem;line-height:1.5;animation:msg-in 0.3s ease}
+@keyframes msg-in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.msg.bot{
+  background:rgba(108,99,255,0.15);border:1px solid rgba(108,99,255,0.2);
+  border-bottom-left-radius:4px;align-self:flex-start;
+}
+.msg.user{
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  color:#fff;border-bottom-right-radius:4px;align-self:flex-end;
+}
+.chat-footer{
+  padding:1rem;border-top:1px solid var(--card-b);
+  display:flex;gap:0.5rem;
+}
+.chat-input{
+  flex:1;background:rgba(255,255,255,0.05);border:1px solid var(--card-b);
+  border-radius:50px;padding:0.6rem 1.1rem;color:var(--text);font:inherit;font-size:0.88rem;
+  outline:none;transition:border-color 0.2s;
+}
+.chat-input:focus{border-color:var(--accent1)}
+.chat-send{
+  width:38px;height:38px;border-radius:50%;flex-shrink:0;
+  background:linear-gradient(135deg,var(--accent1),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  transition:transform 0.2s,opacity 0.2s;
+}
+.chat-send:hover{transform:scale(1.1)}
+.chat-send svg{width:16px;height:16px;fill:white}
+.dots::after {
+  content: '';
+  animation: dots 1.5s steps(3, end) infinite;
+}
+
+@keyframes dots {
+  0% { content: ''; }
+  33% { content: '.'; }
+  66% { content: '..'; }
+  100% { content: '...'; }
+}
+/* ============================================================ FOOTER */
+footer{
+  text-align:center;padding:2rem;
+  border-top:1px solid var(--card-b);
+  color:var(--muted);font-size:0.82rem;
+}
+footer strong{color:var(--accent2)}
+
+/* ============================================================ MOBILE NAV MENU */
+.nav-mobile{
+  display:none;position:fixed;inset:0;z-index:99;
+  background:rgba(5,8,16,0.97);backdrop-filter:blur(20px);
+  flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
+}
+.nav-mobile.open{display:flex}
+.nav-mobile a{font-family:var(--font-head);font-size:2rem;font-weight:700;color:var(--text);transition:color 0.2s}
+.nav-mobile a:hover{color:var(--accent2)}
+.nav-close{position:absolute;top:1.5rem;right:1.5rem;font-size:1.5rem;color:var(--muted);cursor:pointer}
+
+/* ============================================================ RESPONSIVE */
+@media(max-width:768px){
+  nav{padding:1rem 1.5rem}
+  .nav-links,.nav-cta{display:none}
+  .hamburger{display:flex}
+  .about-grid,.contact-grid,.github-card{grid-template-columns:1fr}
+  .avatar-ring{width:200px;height:200px}
+  .projects-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:center}
+}
+
+/* ============================================================ TYPING CURSOR */
+.typed-cursor{animation:cursor-blink 0.8s ease-in-out infinite}
+@keyframes cursor-blink{0%,100%{opacity:1}50%{opacity:0}}
+
+</style>
+</head>
+<body>
+
+<!-- ======================================================== NAV -->
+<nav id="navbar">
+  <div class="nav-logo">RT.</div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#github">GitHub</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Hire Me 🚀</a>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="nav-mobile" id="mobileNav">
+  <span class="nav-close" id="navClose">✕</span>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#skills" onclick="closeMobileNav()">Skills</a>
+  <a href="#projects" onclick="closeMobileNav()">Projects</a>
+  <a href="#github" onclick="closeMobileNav()">GitHub</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+</div>
+
+<!-- ======================================================== HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span></span> Available for opportunities
+    </div>
+    <h1 class="hero-name">Rahul Thombare</h1>
+    <p class="hero-title">
+      <strong>Frontend Developer</strong> &nbsp;·&nbsp; Web Enthusiast
+    </p>
+    <p class="hero-desc">
+      Crafting pixel-perfect, high-performance web experiences with a passion for clean code and stunning UI/UX. Currently levelling up in <strong style="color:var(--accent2)">full-stack development</strong>.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary">View My Work ✦</a>
+      <a href="#contact" class="btn-outline">Let's Connect →</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    scroll
+  </div>
+</section>
+
+<!-- ======================================================== ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-avatar-wrap reveal">
+        <div class="avatar-ring">
+          <div class="avatar-inner" style="color:transparent;background:linear-gradient(135deg,#1a1f3e,#0a0f1e)">
+            <svg viewBox="0 0 120 120" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="60" cy="40" r="28" fill="url(#ag)"/>
+              <ellipse cx="60" cy="110" rx="48" ry="30" fill="url(#ag)"/>
+              <defs>
+                <linearGradient id="ag" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#6c63ff"/>
+                  <stop offset="100%" stop-color="#00d4ff"/>
+                </linearGradient>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div class="avatar-glow"></div>
+      </div>
+
+      <div class="about-text reveal">
+        <div class="section-label">About Me</div>
+        <h2 class="section-title">Building the web,<br><span>one line at a time</span></h2>
+        <p>Hi! I'm <strong>Rahul Thombare</strong>, a passionate <strong>Frontend Developer</strong> from India 🇮🇳. I specialise in creating beautiful, responsive, and user-friendly web interfaces.</p>
+        <p>I have <strong>completed</strong> my frontend journey — mastering HTML, CSS, JavaScript, and React — and I'm now actively <strong>learning backend development</strong> (Node.js, Express, MongoDB) to become a full-stack developer.</p>
+        <p>I'm driven by a love for problem-solving, clean code, and continuous learning. Looking for opportunities to contribute, grow, and build something amazing.</p>
+        <div class="tag-row">
+          <span class="tag">🎓 Fresher</span>
+          <span class="tag">💻 Frontend Expert</span>
+          <span class="tag">⚡ Fast Learner</span>
+          <span class="tag">🚀 Backend Learning</span>
+          <span class="tag">🎯 Open to Work</span>
+        </div>
+        <div class="about-stats" style="margin-top:2rem">
+          <div class="stat-card"><div class="stat-num">10+</div><div class="stat-label">Projects Built</div></div>
+          <div class="stat-card"><div class="stat-num">5+</div><div class="stat-label">Technologies</div></div>
+          <div class="stat-card"><div class="stat-num">100%</div><div class="stat-label">Dedication</div></div>
+          <div class="stat-card"><div class="stat-num">∞</div><div class="stat-label">Curiosity</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== SKILLS -->
+<section id="skills">
+  <div class="skills-header reveal">
+    <div class="section-label" style="justify-content:center">Skills</div>
+    <h2 class="section-title">Technologies I Work With</h2>
+    <p class="section-sub" style="margin:0 auto;text-align:center">Frontend complete · Backend in progress · Always learning</p>
+  </div>
+
+  <!-- Row 1 -->
+  <div class="marquee-wrap" style="margin-top:2rem">
+    <div class="marquee-track" id="track1"></div>
+  </div>
+  <!-- Row 2 -->
+  <div class="marquee-wrap" style="margin-top:0.5rem">
+    <div class="marquee-track2" id="track2"></div>
+  </div>
+</section>
+
+<!-- ======================================================== PROJECTS -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="section-label reveal">Projects</div>
+    <h2 class="section-title reveal">Things I've <span>Built</span></h2>
+    <p class="section-sub reveal">A showcase of projects that reflect my skills, creativity, and passion for web development.</p>
+
+    <div class="projects-grid">
+
+      <div class="project-card reveal">
+        <div class="featured-badge">⭐ Featured</div>
+        <div class="project-img" style="background:linear-gradient(135deg,#0f0c29,#302b63,#24243e)">🛒</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">CSS3</span>
+            <span class="project-tag">Context API</span>
+          </div>
+          <div class="project-name">ShopVault — E-Commerce UI</div>
+          <p class="project-desc">A fully responsive e-commerce frontend with cart management, product filtering, search, and smooth animations. Built with React and Context API for state management.</p>
+          <div class="project-links">
+            <a href="https://github.com/rahulthombare123" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="project-link live">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" style="background:linear-gradient(135deg,#0a192f,#112240,#1d3461)">🌦️</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">JavaScript</span>
+            <span class="project-tag">REST API</span>
+            <span class="project-tag">CSS3</span>
+          </div>
+          <div class="project-name">SkyPulse — Weather App</div>
+          <p class="project-desc">Real-time weather dashboard using OpenWeather API. Features geolocation, 5-day forecast, animated weather icons, and dark/light mode toggle.</p>
+          <div class="project-links">
+            <a href="https://github.com/rahultho" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="project-link live">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" style="background:linear-gradient(135deg,#1a0533,#2d1b69,#11998e)">📝</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">LocalStorage</span>
+            <span class="project-tag">Tailwind</span>
+          </div>
+          <div class="project-name">TaskFlow — Todo App</div>
+          <p class="project-desc">Feature-rich task management app with drag-and-drop, categories, priority levels, due dates, and data persistence. Clean and intuitive UI.</p>
+          <div class="project-links">
+            <a href="https://github.com/rahultho" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="project-link live">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" style="background:linear-gradient(135deg,#0f2027,#203a43,#2c5364)">🎬</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">TMDB API</span>
+            <span class="project-tag">Axios</span>
+          </div>
+          <div class="project-name">CineX — Movie Finder</div>
+          <p class="project-desc">Browse trending movies and TV shows powered by TMDB API. Search, filter by genre, view trailers, and get recommendations with a cinematic UI.</p>
+          <div class="project-links">
+            <a href="https://github.com/rahultho" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="project-link live">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+              Live Demo
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal">
+        <div class="project-img" style="background:linear-gradient(135deg,#1f0a3c,#3d1160,#6a1fa2)">💬</div>
+        <div class="project-body">
+          <div class="project-tags">
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag">Express</span>
+            <span class="project-tag">Socket.io</span>
+          </div>
+          <div class="project-name">ChatSphere — Real-time Chat</div>
+          <p class="project-desc">Real-time chat application with rooms, typing indicators, and online status. Built as my first backend project — using Node.js, Express, and Socket.io. (Learning project)</p>
+          <div class="project-links">
+            <a href="https://github.com/rahultho" target="_blank" class="project-link">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+              GitHub
+            </a>
+            <a href="#" class="project-link live">Live Demo →</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-card reveal" style="border:1px dashed rgba(108,99,255,0.4);background:rgba(108,99,255,0.04)">
+        <div class="project-img" style="background:linear-gradient(135deg,#0a0a0a,#1a1a2e)">➕</div>
+        <div class="project-body">
+          <div class="project-tags"><span class="project-tag">Coming Soon</span></div>
+          <div class="project-name">Next Project Loading...</div>
+          <p class="project-desc">I'm always building something new! Currently working on a full-stack project with React + Node.js + MongoDB. Stay tuned — it's going to be 🔥</p>
+          <div class="project-links">
+            <a href="https://github.com/rahultho" target="_blank" class="project-link live">Follow on GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== GITHUB -->
+<section id="github">
+  <div class="section-inner">
+    <div class="section-label reveal" style="justify-content:center">Open Source</div>
+    <h2 class="section-title reveal" style="text-align:center">GitHub <span>Activity</span></h2>
+    <p class="section-sub reveal" style="text-align:center;margin:0 auto">Consistent contributions — proof that I code every single day.</p>
+
+    <div class="github-card reveal">
+      <div class="github-left">
+        <div class="github-username">@rahulthombare123 </div>
+        <p class="github-desc">Actively building projects and contributing daily. My GitHub is my coding diary — every commit tells a story.</p>
+        <div class="github-stats">
+          <div class="gh-stat"><div class="gh-stat-num">10+</div><div class="gh-stat-label">Repos</div></div>
+          <div class="gh-stat"><div class="gh-stat-num">200+</div><div class="gh-stat-label">Commits</div></div>
+          <div class="gh-stat"><div class="gh-stat-num">🔥</div><div class="gh-stat-label">Streak</div></div>
+        </div>
+        <a href="https://github.com/rahulthombare123" target="_blank" class="github-contrib-link">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          View GitHub Profile
+        </a>
+      </div>
+      <div class="github-right">
+        <!-- GitHub contribution graph — replace 'rahultho' with your actual GitHub username -->
+        <img
+          src="https://ghchart.rshah.org/6c63ff/rahulthombare123"
+          alt="Rahul Thombare's GitHub contribution graph"
+          style="width:100%;border-radius:12px;image-rendering:crisp-edges"
+          onerror="this.src='https://github-readme-stats.vercel.app/api?username=rahulthombare123&show_icons=true&theme=transparent&hide_border=true&title_color=6c63ff&text_color=7b84a3&icon_color=00d4ff'"
+        />
+        <div style="margin-top:1rem;overflow:hidden;border-radius:12px">
+          <img
+            src="https://github-readme-streak-stats.herokuapp.com?user=rahulthombare123&theme=transparent&hide_border=true&ring=6c63ff&fire=ff6b9d&currStreakLabel=00d4ff"
+            alt="GitHub streak stats"
+            style="width:100%"
+            onerror="this.style.display='none'"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="section-label reveal">Get In Touch</div>
+    <h2 class="section-title reveal">Let's <span>Work Together</span></h2>
+    <p class="section-sub reveal">Open to internships, fresher roles, and freelance opportunities. Drop a message — I reply fast!</p>
+
+    <div class="contact-grid" style="margin-top:3rem">
+
+      <!-- Contact Links -->
+      <div>
+        <p style="color:var(--muted);margin-bottom:1.5rem;font-size:0.95rem">Find me on these platforms or shoot me an email directly:</p>
+        <div class="contact-links">
+
+          <!-- Gmail -->
+          <a href="mailto:rahultho@gmail.com" class="contact-link-card reveal">
+            <div class="contact-icon" style="background:rgba(234,67,53,0.15)">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="#ea4335" stroke-width="1.8"/>
+                <polyline points="22,6 12,13 2,6" stroke="#ea4335" stroke-width="1.8"/>
+              </svg>
+            </div>
+            <div class="contact-info">
+              <div class="contact-info-label">Email</div>
+              <!-- ⬇️ CHANGE THIS to your actual Gmail -->
+              <div class="contact-info-val">thombare2019r@gmail.com</div>
+            </div>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/rahultho" target="_blank" class="contact-link-card reveal">
+            <div class="contact-icon" style="background:rgba(10,102,194,0.15)">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#0a66c2">
+                <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/>
+              </svg>
+            </div>
+            <div class="contact-info">
+              <div class="contact-info-label">LinkedIn</div>
+              <!-- ⬇️ CHANGE THIS to your actual LinkedIn URL -->
+              <div class="contact-info-val">www.linkedin.com/in/rahul-thombare-971619236</div>
+            </div>
+          </a>
+
+          <!-- GitHub -->
+          <a href="https://github.com/rahulthombare123" target="_blank" class="contact-link-card reveal">
+            <div class="contact-icon" style="background:rgba(255,255,255,0.07)">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="white">
+                <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+              </svg>
+            </div>
+            <div class="contact-info">
+              <div class="contact-info-label">GitHub</div>
+              <!-- ⬇️ CHANGE THIS to your actual GitHub username -->
+              <div class="contact-info-val">github.com/rahulthombare123</div>
+            </div>
+          </a>
+
+          <!-- Resume Download -->
+          <a href="YOUR_RESUME_LINK_HERE" target="_blank" class="contact-link-card reveal" style="border:1px solid rgba(108,99,255,0.4);background:rgba(108,99,255,0.07)">
+            <div class="contact-icon" style="background:rgba(108,99,255,0.2)">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="var(--accent1)" stroke-width="1.8">
+                <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                <line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/>
+              </svg>
+            </div>
+            <div class="contact-info">
+              <div class="contact-info-label">Resume</div>
+              <div class="contact-info-val" style="color:var(--accent1)">Download PDF ↓</div>
+            </div>
+          </a>
+
+        </div>
+      </div>
+
+      <!-- Chatbot -->
+      <div class="reveal">
+        <div class="chatbot-wrap">
+          <div class="chat-header">
+            <div>
+              <div class="chat-dot"></div>
+            </div>
+            <div>
+              <div class="chat-title">💬 Chat with Rahul's Bot</div>
+              <div class="chat-sub">Your message goes straight to Rahul's inbox ✉️</div>
+            </div>
+          </div>
+          <div class="chat-messages" id="chatMessages">
+            <div class="msg bot">👋 Hey! I'm Rahul's portfolio bot. What's your name?</div>
+          </div>
+          <div class="chat-footer">
+            <input type="text" class="chat-input" id="chatInput" placeholder="Type a message..." />
+            <button class="chat-send" id="chatSend" onclick="handleChat()">
+              <svg viewBox="0 0 24 24"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ======================================================== FOOTER -->
+<footer>
+  <p>Designed & Developed with ❤️ by <strong>Rahul Thombare</strong> &nbsp;·&nbsp; 2024</p>
+  <p style="margin-top:0.4rem">Frontend Developer · Web Enthusiast · Forever Learning 🚀</p>
+</footer>
+
+<!-- ======================================================== SCRIPTS -->
+<script>
+  let lastSentTime = 0;
+const COOLDOWN = 30000; // 30 seconds
+let isSending = false;
+/* ——————————— EmailJS Init ——————————————
+   1. Go to https://www.emailjs.com and create a free account
+   2. Create a service (Gmail) → note Service ID
+   3. Create a template with these variables: {{from_name}}, {{from_email}}, {{message}}
+   4. Copy your Public Key from Account → API Keys
+   5. Replace the values below
+*/
+const EMAILJS_PUBLIC_KEY  = 'YOUR_PUBLIC_KEY';    // ← replace
+const EMAILJS_SERVICE_ID  = 'YOUR_SERVICE_ID';   // ← replace
+const EMAILJS_TEMPLATE_ID = 'YOUR_TEMPLATE_ID';  // ← replace
+emailjs.init(EMAILJS_PUBLIC_KEY);
+
+/* ——————————— Chatbot ——————————— */
+const chatState = { step: 0, name: '', email: '', message: '' };
+const steps = [
+  { prompt: '👋 Hey! I\'m Rahul\'s portfolio bot. What\'s your name?', field: 'name' },
+  { prompt: 'Nice to meet you, {name}! 😊 What\'s your email so Rahul can reply?', field: 'email' },
+  { prompt: 'Perfect! And what would you like to say to Rahul?', field: 'message' },
+];
+
+function addMsg(text, type) {
+  const div = document.createElement('div');
+  div.className = `msg ${type}`;
+  div.textContent = text;
+  const msgs = document.getElementById('chatMessages');
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+}
+
+function handleChat() {
+  const input = document.getElementById('chatInput');
+  const val = input.value.trim();
+  if (!val) return;
+  addMsg(val, 'user');
+  input.value = '';
+
+  const step = chatState.step;
+  if (step < steps.length) {
+    chatState[steps[step].field] = val;
+    chatState.step++;
+
+    if (chatState.step < steps.length) {
+      setTimeout(() => {
+        const next = steps[chatState.step];
+        addMsg(next.prompt.replace('{name}', chatState.name), 'bot');
+      }, 500);
+    } else {
+      // Send email
+      setTimeout(() => {
+        isSending = true;
+
+const loadingMsg = document.createElement('div');
+loadingMsg.className = 'msg bot';
+loadingMsg.innerHTML = '⏳ Sending<span class="dots"></span>';
+document.getElementById('chatMessages').appendChild(loadingMsg);
+        emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+          from_name: chatState.name,
+          from_email: chatState.email,
+          message: chatState.message,
+        }).then(() => {
+  lastSentTime = Date.now();
+  isSending = false;
+
+  loadingMsg.remove();
+  addMsg('✅ Message sent! Rahul will reply soon 🚀', 'bot');
+}).catch(() => {
+  isSending = false;
+
+  loadingMsg.remove();
+  addMsg('❌ Failed! Opening email app...', 'bot');
+
+  const mailtoLink = `mailto:rahultho@gmail.com?subject=Portfolio Enquiry from ${chatState.name}&body=From: ${chatState.name}%0AEmail: ${chatState.email}%0A%0A${chatState.message}`;
+  window.open(mailtoLink);
+});
+      }, 600);
+    }
+  }
+}
+
+document.getElementById('chatInput').addEventListener('keypress', function(e) {
+  if (e.key === 'Enter') handleChat();
+});
+
+/* ——————————— Skills Data ——————————— */
+const skills1 = [
+  { name: 'HTML5', color: '#e34f26', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#e34f26" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"/></svg>` },
+  { name: 'CSS3', color: '#264de4', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#264de4" d="M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z"/></svg>` },
+  { name: 'JavaScript', color: '#f7df1e', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><rect width="24" height="24" rx="3" fill="#f7df1e"/><path fill="#333" d="M6.235 6.453h2.18v7.2c0 3.248-1.508 4.368-3.924 4.368-.576 0-1.308-.096-1.788-.252l.276-1.788c.348.12.804.204 1.26.204 1.032 0 1.996-.456 1.996-2.544V6.453zm5.69 9.516c.576.312 1.5.624 2.436.624 1.008 0 1.536-.42 1.536-1.056 0-.6-.36-.948-1.272-1.284-1.26-.456-2.088-1.152-2.088-2.28 0-1.32 1.092-2.316 2.904-2.316.996 0 1.728.216 2.232.468l-.42 1.608a4.32 4.32 0 00-1.848-.432c-.948 0-1.392.432-1.392.936 0 .612.42.888 1.404 1.272 1.332.504 1.98 1.212 1.98 2.316 0 1.308-1.008 2.4-3.108 2.4-1.02 0-2.016-.264-2.52-.54l.156-1.716z"/></svg>` },
+  { name: 'React', color: '#61dafb', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><circle cx="12" cy="12" r="2.5" fill="#61dafb"/><ellipse rx="10" ry="4" cx="12" cy="12" fill="none" stroke="#61dafb" stroke-width="1.5"/><ellipse rx="10" ry="4" cx="12" cy="12" fill="none" stroke="#61dafb" stroke-width="1.5" transform="rotate(60 12 12)"/><ellipse rx="10" ry="4" cx="12" cy="12" fill="none" stroke="#61dafb" stroke-width="1.5" transform="rotate(120 12 12)"/></svg>` },
+  { name: 'TypeScript', color: '#3178c6', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><rect width="24" height="24" rx="3" fill="#3178c6"/><path fill="white" d="M13.14 14.098c.35.193.77.35 1.26.47.49.12.99.18 1.5.18.49 0 .96-.05 1.41-.15.45-.1.845-.26 1.185-.48.34-.22.61-.5.81-.84.2-.34.3-.74.3-1.2 0-.34-.05-.64-.15-.9-.1-.26-.255-.49-.465-.69-.21-.2-.47-.38-.78-.54-.31-.16-.67-.31-1.08-.45-.29-.1-.55-.2-.78-.3-.23-.1-.425-.2-.585-.32-.16-.12-.285-.25-.375-.4-.09-.15-.135-.33-.135-.54 0-.19.045-.36.135-.51.09-.15.21-.275.36-.375.15-.1.325-.175.525-.225.2-.05.41-.075.63-.075.17 0 .345.015.525.045.18.03.355.075.525.135.17.06.33.135.48.225.15.09.28.195.39.315l1.05-1.545c-.34-.29-.765-.515-1.275-.675-.51-.16-1.055-.24-1.635-.24-.49 0-.965.06-1.425.18-.46.12-.865.3-1.215.54-.35.24-.63.545-.84.915-.21.37-.315.805-.315 1.305 0 .61.155 1.115.465 1.515.31.4.79.73 1.44.99l1.185.465c.32.12.575.235.765.345.19.11.34.225.45.345.11.12.185.25.225.39.04.14.06.29.06.45 0 .43-.155.76-.465.99-.31.23-.73.345-1.26.345-.47 0-.935-.095-1.395-.285-.46-.19-.86-.455-1.2-.795l-1.14 1.545zM10.71 10.57H7.89V18h-2.1v-7.43H3v-1.97h7.71v1.97z"/></svg>` },
+  { name: 'Tailwind', color: '#38bdf8', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#38bdf8" d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.31.74 1.91 1.35.98 1 2.09 2.15 4.59 2.15 2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.3-.74-1.91-1.35C15.61 7.15 14.5 6 12 6zm-5 5c-2.67 0-4.33 1.33-5 4 1-1.33 2.17-1.83 3.5-1.5.76.19 1.3.74 1.91 1.35C8.39 15.85 9.5 17 12 17c2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.31-.74-1.91-1.35C10.61 12.15 9.5 11 7 11z"/></svg>` },
+  { name: 'Git', color: '#f05032', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#f05032" d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.713.721.713 1.883 0 2.6-.719.721-1.889.721-2.609 0-.719-.719-.719-1.879 0-2.598.182-.18.387-.316.605-.406V8.835c-.217-.091-.424-.222-.604-.406-.545-.545-.676-1.342-.396-2.009L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477c.604.604 1.582.604 2.186 0l10.43-10.43c.605-.603.605-1.582 0-2.187"/></svg>` },
+  { name: 'GitHub', color: '#ffffff', svg: `<svg viewBox="0 0 24 24" width="22" height="22" fill="white"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>` },
+];
+const skills2 = [
+  { name: 'Node.js', color: '#339933', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#339933" d="M11.998 24c-.321 0-.641-.084-.922-.247l-2.936-1.737c-.438-.245-.224-.332-.08-.383.585-.203.703-.25 1.328-.604.065-.037.151-.023.218.017l2.256 1.339c.082.045.198.045.272 0l8.795-5.076c.082-.047.134-.141.134-.238V6.921c0-.099-.052-.19-.137-.242l-8.791-5.072c-.081-.047-.189-.047-.271 0L3.075 6.68c-.084.048-.139.146-.139.243v10.15c0 .097.055.189.139.235l2.409 1.391c1.307.654 2.108-.116 2.108-.891V7.787c0-.142.114-.253.256-.253h1.115c.139 0 .255.111.255.253v10.021c0 1.745-.95 2.745-2.604 2.745-.508 0-.909 0-2.026-.551L2.28 18.675C1.718 18.352 1.37 17.75 1.37 17.1V6.921c0-.649.348-1.254.91-1.578L11.073.272a1.884 1.884 0 011.85 0l8.795 5.071c.563.322.912.927.912 1.578V17.1c0 .648-.349 1.249-.912 1.571l-8.795 5.078a1.874 1.874 0 01-.925.251z"/></svg>` },
+  { name: 'Express', color: '#ffffff', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="white" d="M24 18.588a1.529 1.529 0 01-1.895-.72l-3.45-4.771-.5-.667-4.003 5.444a1.466 1.466 0 01-1.944.666l5.339-7.26-5.078-6.89a1.499 1.499 0 011.944.666l3.372 4.603 3.213-4.498a1.468 1.468 0 011.943-.671L16.99 10.2l5.012 6.821-.002.002zm-13.237-4.512l-.93 1.317-3.253-4.431A1.499 1.499 0 014.637 10.2l.001-.001 5.125 3.877zm-2.376-5.256L0 5.143l.002.002a1.5 1.5 0 011.944.666L8.383 14.1c-.928 1.26-1.858 2.521-2.788 3.78l-.002.002a1.499 1.499 0 01-1.944-.671L.001 11.33 5.5 4.03l-.001.001a1.466 1.466 0 011.888.789z"/></svg>` },
+  { name: 'MongoDB', color: '#47a248', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#47a248" d="M17.193 9.555c-1.264-5.58-4.252-7.243-4.573-8.227-.36-1.065-.52-1.327-.52-1.327v20.517c.184-.168 4.882-3.14 4.882-10.963.001-.544-.04-1.174-.12-1.815-.023-.179-.049-.354-.079-.525-.032-.18-.066-.36-.108-.538l-.103-.405-.161-.68-.118-.54z"/><path fill="#47a248" d="M12.1.017C9.776 3.14 6.9 5.15 6.9 5.15c-.025.016-.048.033-.072.05L5.96 5.75l-.48.32-.413.27-.413.28-.39.268-.363.254-.336.242-.307.23-.277.22-.243.21-.208.2-.17.19-.128.18-.082.167-.03.154.012.14.053.124.1.108.15.09.21.069.274.045.336.018.406-.017.476-.065.548-.126.617-.2.68-.285.738-.382.788-.494.829-.617.86-.756.879-.908.885-1.073.878-1.25.855-1.443.816-1.648.761-1.866.69-2.097.603-2.34.498-2.596.38-2.865.25-3.147.107-3.44-.035-3.747-.183-4.066-.337-4.396-.494-4.74-.653-5.095-.814-5.462-.975-5.84-1.136-6.23-1.295-6.63-1.452-7.042-1.604-7.464-1.75-7.896-1.888-8.336-2.016-8.782-2.133-9.233-2.237-9.688-2.325-10.146-2.398-10.604-2.452-11.063-2.488-11.52-2.503-11.975-2.495-12.427-2.463-12.874-2.408-13.314-2.327-13.747-2.22-14.17-2.084-14.583-1.919-14.983-1.724-15.37-1.497-15.74-1.236-16.093-.94-16.43-.608-16.748-.237-17.046.176-17.323.63-17.58 1.127-17.813 1.664-18.025 2.244-18.212 2.866-18.374 3.532-18.511 4.24-18.622 4.99-18.706 5.783-18.764 6.617-18.794 7.49-18.796 8.403-18.77 9.355-18.716 10.343-18.635 11.37-18.523 12.432-18.38 13.53-18.205 14.662-17.995 15.827-17.75 17.023-17.468 18.25-17.147 19.507-16.786 20.793-16.384 22.108-15.938 23.45-15.448 24.818-14.91 26.213-14.327 27.633-13.695 29.075-13.016 30.54-12.286 32.025-11.507 33.531-10.677 35.053-9.793 36.591-8.855 38.142-7.859 39.703-6.803 41.271-5.686 42.844-4.504 44.418-3.252 45.99-1.925 47.559-.52 49.12 0.968 50.673 2.542 52.213 4.204 53.738 5.957 55.244 7.803 56.727 9.745 58.184 11.786 59.609 13.93 60.998 16.08 62.346 18.34 63.651 20.712 64.907 23.2 66.11 25.808 67.256 28.54 68.341 31.399 69.36 34.388 70.309 37.51 71.184 40.77 71.98 44.17 72.694 47.713 73.323 51.4 73.862 55.236 74.308 59.22 74.658 63.356 74.91 67.644 75.063 72.084 75.116 76.678 75.07 81.425 74.924 86.325 74.677 91.377 74.33 96.58 73.882 101.934 73.335 107.44 72.686 113.096 71.936 118.903 71.087 124.86 70.138 130.966 69.09 137.22 67.944 143.621 66.701 150.17 65.361 156.865 63.926 163.706 62.398 170.691 60.777 177.821 59.064 185.094 57.261 192.51 55.369 200.066 53.391 207.763 51.328 215.602 49.183 223.58 46.957 231.698 44.652 239.954 42.27 248.35 39.813 256.883 37.283 265.553 34.683 274.361 32.014 283.306 29.279 292.387 26.48 301.604 23.619 310.956 20.699 320.444 17.721 330.065 14.689 339.82 11.604 349.709 8.469 359.73 5.286 369.884 2.059 380.17-1.208 390.588-4.512 401.137-7.852 411.818-11.226 422.63-14.633 433.573-18.069 444.645-21.531 455.847-24.018 467.178-28.524 478.637-32.044 490.223-35.572 501.937-39.108 513.776-42.645 525.741-46.18 537.83-49.71 550.044-53.231 562.38-56.737 574.838-60.224 587.418-63.687 600.118-67.12 612.937-70.518 625.874-73.875 638.929-77.187 652.1-80.45 665.386-83.658 678.786-86.806 692.297-89.889 705.92-92.901 719.651-95.836 733.49-98.688 747.437-101.451 761.488-104.119 775.643-106.686 789.9-109.147 804.256-111.497 818.711-113.73 833.262-115.84 847.908-117.821 862.645-119.667 877.473-121.374 892.388-122.935 907.389-124.347 922.472-125.603 937.636-126.699 952.877-127.63 968.193-128.393 983.582-128.982 999.041-129.393 1014.566-129.625 1030.154-129.673 1045.801-129.535 1061.504-129.211 1077.261-128.698 1093.067-128 1108.918-127.115 1124.811-126.049 1140.741-124.804 1156.706-123.385 1172.699-121.797 1188.717-120.047 1204.755-118.141 1220.809-116.09 1236.873-113.901 1252.943-111.585 1269.012-109.151 1285.074-106.611 1301.124-103.977 1317.154-101.262 1333.16-98.478 1349.131-95.639 1365.062-92.759 1380.945-89.852 1396.775-86.932 1412.543-84.015 1428.242-81.116 1443.865-78.25 1459.406-75.432 1474.855-72.677 1490.206-69.999 1505.453-67.412 1520.587-64.929 1535.601-62.562 1550.487-60.325 1565.238-58.229 1579.845-56.286 1594.3-54.508 1608.595-52.905 1622.72-51.488 1636.667-50.264 1650.425-49.24 1663.986-48.423 1677.34-47.815 1690.479-47.42 1703.392-47.24 1716.069-47.275 1728.499-47.525 1740.673-47.99 1752.578-48.667 1764.203-49.553 1775.537-50.645 1786.567-51.938 1797.281-53.426 1807.665-55.103 1817.705-56.963 1827.388-59.0 1836.7-61.204 1845.629-63.564 1854.16-66.072 1862.28-68.718 1869.975-71.49 1877.232-74.378 1884.037-77.37 1890.376-80.452 1896.236-83.609 1901.601-86.826 1906.457-90.09 1910.789-93.384 1914.58-96.691 1917.815-100.0"/></svg>` },
+  { name: 'VS Code', color: '#007acc', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#007acc" d="M23.15 2.587L18.21.21a1.494 1.494 0 00-1.705.29l-9.46 8.63-4.12-3.128a.999.999 0 00-1.276.057L.327 7.261A1 1 0 00.326 8.74L3.899 12 .326 15.26a1 1 0 00.001 1.479L1.65 17.94a.999.999 0 001.276.057l4.12-3.128 9.46 8.63a1.492 1.492 0 001.704.29l4.942-2.377A1.5 1.5 0 0024 20.06V3.939a1.5 1.5 0 00-.85-1.352zm-5.146 14.861L10.826 12l7.178-5.448v10.896z"/></svg>` },
+  { name: 'Figma', color: '#f24e1e', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#f24e1e" d="M5.82 24c1.618 0 2.934-1.316 2.934-2.934v-2.934H5.82c-1.618 0-2.934 1.316-2.934 2.934S4.202 24 5.82 24z"/><path fill="#a259ff" d="M2.886 12c0-1.618 1.316-2.934 2.934-2.934H8.754v5.868H5.82C4.202 14.934 2.886 13.618 2.886 12z"/><path fill="#0acf83" d="M2.886 5.934C2.886 4.316 4.202 3 5.82 3H8.754v5.868H5.82C4.202 8.868 2.886 7.552 2.886 5.934z"/><path fill="#f24e1e" d="M8.754 3h2.934c1.618 0 2.934 1.316 2.934 2.934s-1.316 2.934-2.934 2.934H8.754V3z"/><path fill="#1abcfe" d="M14.622 12c0 1.618-1.316 2.934-2.934 2.934S8.754 13.618 8.754 12s1.316-2.934 2.934-2.934 2.934 1.316 2.934 2.934z"/></svg>` },
+  { name: 'Postman', color: '#ff6c37', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#ff6c37" d="M13.527.099C6.955-.744.942 3.9.099 10.473c-.843 6.572 3.8 12.584 10.373 13.428 6.573.843 12.587-3.801 13.428-10.374C24.744 6.955 20.101.943 13.527.099zm2.471 7.485a.855.855 0 00-.593.25l-4.453 4.453-.307-.307-.643-.643c4.389-4.376 4.696-4.082 6.066-3.683a.293.293 0 01-.07.13zm-.982 1.498l-4.094 4.094c-.146.146-.305.28-.477.394l-2.077-2.077a2.78 2.78 0 00.373-.493l4.143-4.14a.85.85 0 01.59-.251.849.849 0 01.838.918.849.849 0 01-.296.555zM5.458 19.22a.834.834 0 01-.586-.24.835.835 0 01-.233-.601.834.834 0 01.26-.58l1.45-1.449.75.75-1.418 1.38a.836.836 0 01-.222.14zm7.703-7.2l-4.14 4.14a2.78 2.78 0 01-.493.373l-1.044-1.044a2.78 2.78 0 01.394-.477l4.094-4.094a.85.85 0 01.59-.251.849.849 0 01.838.918.849.849 0 01-.239.435z"/></svg>` },
+  { name: 'REST API', color: '#00d4ff', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#00d4ff" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 14.5v-9l6 4.5-6 4.5z"/></svg>` },
+  { name: 'npm', color: '#cb3837', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#cb3837" d="M1.763 0C.786 0 0 .786 0 1.763v20.474C0 23.214.786 24 1.763 24h20.474c.977 0 1.763-.786 1.763-1.763V1.763C24 .786 23.214 0 22.237 0zM5.13 5.323l13.837.019-.009 13.836h-3.464l.01-10.382h-3.456L11.948 19.4H5.113z"/></svg>` },
+  { name: 'Vite', color: '#646cff', svg: `<svg viewBox="0 0 24 24" width="22" height="22"><path fill="#646cff" d="M9.252 6.52L14.18.272a.54.54 0 01.893.594L13.23 5.26h5.498a.54.54 0 01.407.893L10.017 16.55a.54.54 0 01-.87-.59l1.916-4.89H5.855a.54.54 0 01-.37-.926z"/></svg>` },
+];
+
+function buildMarquee(track, skills) {
+  // double the items for seamless loop
+  const all = [...skills, ...skills];
+  all.forEach(s => {
+    const chip = document.createElement('div');
+    chip.className = 'skill-chip';
+    chip.innerHTML = `${s.svg}<span>${s.name}</span>`;
+    track.appendChild(chip);
+  });
+}
+buildMarquee(document.getElementById('track1'), skills1);
+buildMarquee(document.getElementById('track2'), skills2);
+
+/* ——————————— Scroll Reveal ——————————— */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ——————————— Hamburger ——————————— */
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('mobileNav').classList.add('open');
+});
+document.getElementById('navClose').addEventListener('click', closeMobileNav);
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+}
+
+/* ——————————— Nav scroll effect ——————————— */
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  nav.style.background = window.scrollY > 60
+    ? 'rgba(5,8,16,0.92)'
+    : 'rgba(5,8,16,0.7)';
+});
+</script>
+</body>
+</html>
