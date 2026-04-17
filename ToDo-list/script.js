@@ -1,4 +1,4 @@
-// ---------- STORAGE & STATE ----------
+// ----------- STORAGE & STATE -----------
 let todos = [];
 let currentFilter = "all";   // 'all', 'active', 'completed'
 
