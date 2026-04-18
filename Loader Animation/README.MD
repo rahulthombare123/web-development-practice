@@ -19,7 +19,7 @@ A clean, modern, and fully responsive loading animation built with pure HTML and
 - CSS3 (animations, flexbox, backdrop-filter)
 - Google Fonts (Segoe UI fallback)
 
-## 🚀 How to Use
+### 🚀 How to Use
 
 1. Copy the entire HTML code into a new file (e.g., `loader.html`).
 2. Open the file in any modern web browser.
