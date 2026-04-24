@@ -1,4 +1,4 @@
-# 🌀 CSS Loader Animation
+# 🌀 CSS Loader Animation 
 
 A clean, modern, and fully responsive loading animation built with pure HTML and CSS. Perfect for use as a splash screen, placeholder, or loading indicator in any web project. 
 
