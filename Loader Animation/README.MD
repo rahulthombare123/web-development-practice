@@ -5,7 +5,7 @@ A clean, modern, and fully responsive loading animation built with pure HTML and
 ![Loader Preview](link-to-screenshot.png)  
 *(Replace with an actual screenshot of your loader)*
 
-## ✨ Features
+## ✨ Features 
 
 - **Pure CSS** – no JavaScript, no external dependencies.
 - **Smooth animations** – spinning circle + pulsing text.
