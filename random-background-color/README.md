@@ -24,4 +24,4 @@ random-background-color/
 2. Open index.html in your browser
 
 ## Author
-Suraj
+Rt Dev
