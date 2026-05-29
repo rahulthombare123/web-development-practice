@@ -9,4 +9,4 @@ This project is part of a YouTube tutorial in which we build a responsive expand
 - Smooth animations with CSS.
 
 
-![preview img](/preview.png)
+![preview img](/preview.img)
