@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dragger — Drag & Drop Playground</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <div class="logo">⬡ DRAGGER</div>
+    <p class="tagline">Drag. Drop. Rearrange.</p>
+  </header>
+
+  <main>
+    <section class="board" id="board">
+
+      <div class="card" draggable="true" data-id="1">
+        <span class="card-icon">🎯</span>
+        <p>Task One</p>
+        <span class="drag-hint">drag me</span>
+      </div>
+
+      <div class="card" draggable="true" data-id="2">
+        <span class="card-icon">🚀</span>
+        <p>Task Two</p>
+        <span class="drag-hint">drag me</span>
+      </div>
+
+      <div class="card" draggable="true" data-id="3">
+        <span class="card-icon">💡</span>
+        <p>Task Three</p>
+        <span class="drag-hint">drag me</span>
+      </div>
+
+      <div class="card" draggable="true" data-id="4">
+        <span class="card-icon">🔥</span>
+        <p>Task Four</p>
+        <span class="drag-hint">drag me</span>
+      </div>
+
+      <div class="card" draggable="true" data-id="5">
+        <span class="card-icon">⚡</span>
+        <p>Task Five</p>
+        <span class="drag-hint">drag me</span>
+      </div>
+
+      <div class="card" draggable="true" data-id="6">
+        <span class="card-icon">🎨</span>
+        <p>Task Six</p>
+        <span class="drag-hint">drag me</span>
+      </div>
+
+    </section>
+
+    <div class="drop-zone" id="dropZone">
+      <div class="drop-zone-inner">
+        <span class="drop-icon">🗑️</span>
+        <p>Drop here to remove</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="addBtn">+ Add Card</button>
+      <button id="resetBtn">↺ Reset</button>
+      <span class="count-label">Cards: <span id="cardCount">6</span></span>
+    </div>
+  </main>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
