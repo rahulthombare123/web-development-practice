@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===================== SEO META ===================== -->
+  <title>Free BMI Calculator – BMI, Ideal Weight & Daily Calorie Needs</title>
+  <meta
+    name="description"
+    content="Free BMI calculator that also shows your ideal weight range, daily calorie needs (BMR/TDEE), personalized health tips, and tracks your BMI history. 100% private — everything runs in your browser."
+  />
+  <meta name="keywords" content="bmi calculator, body mass index, ideal weight calculator, bmr calculator, tdee calculator, free bmi tool, calorie calculator" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph (for social sharing previews) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Free BMI Calculator – BMI, Ideal Weight & Daily Calories" />
+  <meta property="og:description" content="Calculate your BMI, ideal weight range, and daily calorie needs instantly. 100% private — nothing leaves your device." />
+  <!-- Once hosted, uncomment and update these with your real domain/image -->
+  <!-- <meta property="og:image" content="https://yourdomain.com/og-image.png" /> -->
+  <!-- <link rel="canonical" href="https://yourdomain.com/" /> -->
+
+  <!-- Google Fonts: "Sora" for headings/numbers, "Inter" for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- ===================== FAQ STRUCTURED DATA (helps Google show rich results) ===================== -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is a healthy BMI range?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For most adults, a BMI between 18.5 and 24.9 is considered within the normal range. Below 18.5 is classed as underweight, 25 to 29.9 as overweight, and 30 or above as obese."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is BMI accurate for everyone?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BMI is a useful screening tool but does not directly measure body fat. It can be less accurate for athletes with high muscle mass, pregnant women, children, and older adults, so it should be considered alongside other health indicators."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How is BMI calculated?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BMI is calculated by dividing your weight in kilograms by the square of your height in meters (BMI = weight in kg divided by height in meters squared)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are BMR and TDEE?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "BMR (Basal Metabolic Rate) is the energy your body needs at complete rest. TDEE (Total Daily Energy Expenditure) adds your activity level on top of BMR to estimate the total calories you burn in a day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is my data stored anywhere?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. All calculations happen in your browser. Your BMI history is saved only in your browser's local storage on your own device and is never transmitted to any server."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+  <!-- Decorative blurred shapes behind the glass cards (purely visual) -->
+  <div class="bg-shape shape-one" aria-hidden="true"></div>
+  <div class="bg-shape shape-two" aria-hidden="true"></div>
+  <div class="bg-shape shape-three" aria-hidden="true"></div>
+
+  <main class="app">
+
+    <!-- ===================== HEADER ===================== -->
+    <header class="app__header">
+      <p class="eyebrow">Health &amp; Fitness Tool</p>
+      <h1>BMI Calculator</h1>
+      <p class="subtitle">
+        Check your BMI, ideal weight range, and daily calorie needs &mdash;
+        instantly and privately.
+      </p>
+    </header>
+
+    <!-- ===================== CALCULATOR CARD ===================== -->
+    <section class="card" aria-label="BMI calculator">
+
+      <form id="bmi-form" class="bmi-form" novalidate>
+        <div class="field">
+          <label for="height">Height (cm)</label>
+          <input
+            type="number"
+            id="height"
+            name="height"
+            placeholder="e.g. 170"
+            min="50"
+            max="272"
+            step="0.1"
+            inputmode="decimal"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="weight">Weight (kg)</label>
+          <input
+            type="number"
+            id="weight"
+            name="weight"
+            placeholder="e.g. 65"
+            min="10"
+            max="500"
+            step="0.1"
+            inputmode="decimal"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="age">Age (years)</label>
+          <input
+            type="number"
+            id="age"
+            name="age"
+            placeholder="e.g. 25"
+            min="2"
+            max="120"
+            step="1"
+            inputmode="numeric"
+            required
+          />
+        </div>
+
+        <div class="field">
+          <label for="sex">Sex</label>
+          <select id="sex" name="sex" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </select>
+        </div>
+
+        <div class="field field--wide">
+          <label for="activity">Activity level</label>
+          <select id="activity" name="activity" required>
+            <option value="1.2">Sedentary &mdash; little or no exercise</option>
+            <option value="1.375">Light &mdash; exercise 1&ndash;3 days/week</option>
+            <option value="1.55" selected>Moderate &mdash; exercise 3&ndash;5 days/week</option>
+            <option value="1.725">Active &mdash; exercise 6&ndash;7 days/week</option>
+            <option value="1.9">Very active &mdash; hard daily exercise or physical job</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn-primary">Calculate My Results</button>
+
+        <p class="form-note">
+          Age, sex, and activity level are used only to estimate your daily
+          calorie needs &mdash; they do not affect your BMI.
+        </p>
+      </form>
+
+      <!-- Validation error message (hidden until needed) -->
+      <p id="error-msg" class="error-msg" role="alert"></p>
+
+      <!-- ===================== RESULT (hidden until first calculation) ===================== -->
+      <div id="result" class="result hidden">
+
+        <div class="result__top">
+          <div class="result__value">
+            <span id="bmi-number">0.0</span>
+            <span class="result__label">your BMI</span>
+          </div>
+          <div id="bmi-category" class="badge">Category</div>
+        </div>
+
+        <!-- BMI spectrum bar: visually shows where the result falls -->
+        <div class="scale">
+          <div class="scale__track">
+            <span class="scale__segment scale__segment--under"></span>
+            <span class="scale__segment scale__segment--normal"></span>
+            <span class="scale__segment scale__segment--over"></span>
+            <span class="scale__segment scale__segment--obese"></span>
+            <div id="scale-marker" class="scale__marker"></div>
+          </div>
+          <div class="scale__labels">
+            <span>Underweight</span>
+            <span>Normal</span>
+            <span>Overweight</span>
+            <span>Obese</span>
+          </div>
+        </div>
+
+        <!-- Insight cards: ideal weight, daily calories, health tip -->
+        <div class="insights">
+          <div class="insight-card">
+            <span class="insight-card__icon" aria-hidden="true">⚖️</span>
+            <h3>Ideal Weight Range</h3>
+            <p id="ideal-weight" class="insight-card__value">&ndash;</p>
+            <p class="insight-card__note">For your height, at a normal BMI</p>
+          </div>
+
+          <div class="insight-card">
+            <span class="insight-card__icon" aria-hidden="true">🔥</span>
+            <h3>Daily Calories</h3>
+            <p id="calorie-needs" class="insight-card__value">&ndash;</p>
+            <p class="insight-card__note">Estimated to maintain current weight</p>
+          </div>
+
+          <div class="insight-card insight-card--tip">
+            <span class="insight-card__icon" aria-hidden="true">💡</span>
+            <h3>Health Tip</h3>
+            <p id="health-tip" class="insight-card__value insight-card__value--tip">&ndash;</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===================== AD PLACEHOLDER #1 ===================== -->
+    <!--
+      Once your AdSense account is approved, replace this div's
+      contents with your AdSense <ins> ad unit code.
+    -->
+    <div class="ad-slot" aria-hidden="true">Ad space</div>
+
+    <!-- ===================== BMI HISTORY CARD ===================== -->
+    <section class="card history-card" aria-label="Your BMI history">
+      <div class="history__header">
+        <h2>Your BMI History</h2>
+        <button type="button" id="clear-history" class="link-btn">Clear history</button>
+      </div>
+
+      <p id="history-empty" class="history__empty">
+        No saved results yet &mdash; calculate your BMI above to start
+        tracking your progress over time.
+      </p>
+
+      <div class="history__table-wrap">
+        <table id="history-table" class="history__table hidden">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">BMI</th>
+              <th scope="col">Category</th>
+            </tr>
+          </thead>
+          <tbody id="history-body"></tbody>
+        </table>
+      </div>
+
+      <p class="history__disclaimer">
+        Saved only in your browser (local storage) &mdash; never sent anywhere.
+      </p>
+    </section>
+
+    <!-- ===================== SEO CONTENT / FAQ ===================== -->
+    <section class="card content" aria-label="About BMI">
+      <h2>What is Body Mass Index (BMI)?</h2>
+      <p>
+        Body Mass Index, or BMI, is a simple number calculated from your
+        height and weight. Doctors and health organizations around the world
+        use it as a quick first screening tool to estimate whether someone's
+        weight falls into a healthy range for their height. While it does not
+        measure body fat directly, BMI remains one of the most widely used
+        starting points for understanding general health and weight trends.
+      </p>
+
+      <h2>How your results are calculated</h2>
+      <p>
+        Your BMI is calculated as weight in kilograms divided by your height
+        in meters squared. Your ideal weight range is the weight your body
+        would need to be at your height to fall within the normal BMI range
+        of 18.5 to 24.9. Your daily calorie estimate first calculates your
+        Basal Metabolic Rate (BMR) &mdash; the energy your body burns at
+        complete rest &mdash; using the Mifflin-St Jeor formula, then
+        multiplies it by your selected activity level to estimate your Total
+        Daily Energy Expenditure (TDEE).
+      </p>
+
+      <!-- ===================== AD PLACEHOLDER #2 (in-content) ===================== -->
+      <div class="ad-slot" aria-hidden="true">Ad space</div>
+
+      <h2>Frequently Asked Questions</h2>
+
+      <details>
+        <summary>What is a healthy BMI range?</summary>
+        <p>
+          For most adults, a BMI between 18.5 and 24.9 is considered within
+          the normal range. Below 18.5 is classed as underweight, 25 to 29.9
+          as overweight, and 30 or above as obese.
+        </p>
+      </details>
+
+      <details>
+        <summary>Is BMI accurate for everyone?</summary>
+        <p>
+          BMI is a useful screening tool but does not directly measure body
+          fat. It can be less accurate for athletes with high muscle mass,
+          pregnant women, children, and older adults, so it is best considered
+          alongside other health indicators.
+        </p>
+      </details>
+
+      <details>
+        <summary>How is BMI calculated?</summary>
+        <p>
+          BMI is calculated by dividing your weight in kilograms by the square
+          of your height in meters.
+        </p>
+      </details>
+
+      <details>
+        <summary>What are BMR and TDEE?</summary>
+        <p>
+          BMR (Basal Metabolic Rate) is the energy your body needs at complete
+          rest. TDEE (Total Daily Energy Expenditure) adds your activity level
+          on top of BMR to estimate the total calories you burn in a day.
+        </p>
+      </details>
+
+      <details>
+        <summary>Is my data stored anywhere?</summary>
+        <p>
+          No. All calculations happen in your browser. Your BMI history is
+          saved only in your browser's local storage on your own device and
+          is never transmitted to any server.
+        </p>
+      </details>
+    </section>
+
+    <!-- ===================== FOOTER ===================== -->
+    <footer class="app__footer">
+      <p>&copy; 2026 BMI Calculator &mdash; all calculations happen on your device.</p>
+      <nav class="footer__links">
+        <button type="button" class="link-btn" id="open-privacy">Privacy Policy</button>
+        <span aria-hidden="true">•</span>
+        <button type="button" class="link-btn" id="open-terms">Terms &amp; Conditions</button>
+      </nav>
+    </footer>
+
+  </main>
+
+  <!-- ===================== PRIVACY POLICY MODAL ===================== -->
+  <div id="privacy-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="privacy-title">
+      <button type="button" class="modal__close" data-close-modal aria-label="Close">&times;</button>
+      <h2 id="privacy-title">Privacy Policy</h2>
+      <p>
+        This application processes all data locally on your device. We guarantee
+        zero data collection. No personal, financial, or health-related information
+        is transmitted or stored on any server.
+      </p>
+      <p>
+        Your height, weight, age, and calculated results exist only in your
+        browser. Your BMI history is saved using your browser's local storage
+        so it persists between visits on this device only &mdash; it is never
+        transmitted anywhere. Clearing your browser data or pressing
+        "Clear history" permanently erases it. This page does not use cookies,
+        analytics, or third-party trackers (aside from any advertising scripts
+        you may add yourself, which are governed by their own privacy
+        policies).
+      </p>
+    </div>
+  </div>
+
+  <!-- ===================== TERMS & CONDITIONS MODAL ===================== -->
+  <div id="terms-modal" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="terms-title">
+      <button type="button" class="modal__close" data-close-modal aria-label="Close">&times;</button>
+      <h2 id="terms-title">Terms &amp; Conditions</h2>
+      <p>
+        <strong>Medical Disclaimer:</strong> This BMI Calculator is provided for
+        general informational and educational purposes only. It is not a substitute
+        for professional medical advice, diagnosis, or treatment.
+      </p>
+      <p>
+        Body Mass Index (BMI), ideal weight ranges, and calorie estimates
+        (BMR/TDEE) are simple screening calculations and do not account for
+        muscle mass, bone density, body composition, medical conditions, or
+        individual metabolism. Always seek the advice of a qualified physician
+        or healthcare provider regarding any medical condition, or before
+        making changes to your diet, exercise, or lifestyle.
+      </p>
+      <p>
+        By using this tool, you acknowledge that the developer accepts no
+        liability for decisions made based on the results displayed here.
+      </p>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
