@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code Generator</title>
+  <meta name="description" content="Turn any text or link into a QR code and download it as a PNG image.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="card">
+
+    <header class="card-header">
+      <h1>QR Code Generator</h1>
+      <p>Turn any text or link into a QR code you can download.</p>
+    </header>
+
+    <div class="field">
+      <label for="textInput">Text or URL</label>
+      <input type="text" id="textInput" placeholder="https://example.com" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <label for="sizeRange">Size: <span id="sizeValue">220</span> px</label>
+      <input type="range" id="sizeRange" min="120" max="400" step="20" value="220">
+    </div>
+
+    <button id="generateBtn" class="btn btn-primary">Generate QR Code</button>
+
+    <p id="message" class="message"></p>
+
+    <div id="qrWrapper" class="qr-wrapper">
+      <canvas id="qrCanvas"></canvas>
+    </div>
+
+    <button id="downloadBtn" class="btn btn-secondary" disabled>Download PNG</button>
+
+  </main>
+
+  <script src="qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
