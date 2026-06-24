@@ -1,0 +1,215 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: #f6f8fa;
+}
+
+/* ================= HEADER ================= */
+
+header {
+  background: #0d1117;
+  height: 70px;
+}
+
+nav {
+  max-width: 1200px;
+  height: 100%;
+  margin: auto;
+  padding: 0 30px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.logo img {
+  width: 40px;
+}
+
+.logo h1 {
+  color: white;
+  font-size: 2rem;
+}
+
+nav a img {
+  height: 30px;
+}
+
+/* ================= SEARCH SECTION ================= */
+
+.search-section {
+  padding: 50px 20px;
+}
+
+.search-box {
+  max-width: 800px;
+  margin: auto;
+
+  display: flex;
+  gap: 15px;
+}
+
+.input-box {
+  flex: 1;
+  position: relative;
+}
+
+.input-box img {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+}
+
+.input-box input {
+  width: 100%;
+  height: 52px;
+  border: 2px solid #d0d7de;
+  border-radius: 12px;
+  outline: none;
+  padding-left: 60px;
+  font-size: 1rem;
+}
+
+.input-box input::placeholder {
+  color: #6e7781;
+}
+
+#search-btn {
+  width: 140px;
+  height: 52px;
+  border: none;
+  border-radius: 12px;
+  background: #0d1117;
+  color: white;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+#search-btn:hover {
+  background: #161b22;
+}
+
+
+.profile-section {
+  padding: 40px 20px;
+}
+
+.profile-card {
+  max-width: 800px;
+  margin: auto;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-card h2 {
+  margin-bottom: 15px;
+  color: #0d1117;
+}
+
+.profile-card p {
+  color: #57606a;
+  font-size: 1rem;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
+
+.username {
+  color: #57606a;
+  margin: 10px 0;
+}
+
+.bio {
+  margin: 20px 0;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin: 30px 0;
+}
+
+.profile-link {
+  display: inline-block;
+  padding: 12px 20px;
+  background: #0d1117;
+  color: white;
+  text-decoration: none;
+  border-radius: 10px;
+}
+
+/* footer */
+footer {
+   position: fixed;
+   left: 0;
+   bottom: 0;
+   width: 100%;
+  padding: 25px 20px;
+  background: #0d1117;
+  color: #ffffff;
+  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+ 
+footer p{
+      text-align: center;
+}
+
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .logo h1 {
+    font-size: 1.4rem;
+  }
+
+  nav a img {
+    display: none;
+  }
+
+  .search-box {
+    flex-direction: column;
+  }
+
+  #search-btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  footer {
+    flex-direction: column;
+    gap: 12px;
+    text-align: center;
+  }
+}
