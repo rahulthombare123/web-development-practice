@@ -8,7 +8,7 @@ A simple and modern PS5 vs Xbox interactive landing page built with HTML and CSS
 * PS5 vs Xbox Showcase
 * Smooth Hover Expansion Animation
 * Responsive Design
-* Flexbox Layout
+* Flexbox Layout 
 
 ## 🛠️ Technologies Used
 
