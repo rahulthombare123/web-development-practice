@@ -1,7 +1,7 @@
 # BMI Calculator
 
 A free, privacy-first BMI calculator with ideal weight range, daily
-calorie (BMR/TDEE) estimate, personalized health tips, and a local BMI
+calorie (BMR/TDEE) estimate, personalized health tips, and local BMI
 history tracker — built with plain HTML, CSS, and JavaScript.
 
 ## Features
