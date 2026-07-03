@@ -1,0 +1,240 @@
+/* ===========================================================
+   MOOD INK — stylesheet
+   Paper base + ink ramp, no frameworks.
+   =========================================================== */
+
+:root {
+  --bg: #DAD6C4;         /* live: set by JS every frame */
+  --ink-text: #221F1A;   /* live: set by JS every frame */
+  --ink-current: #93A6A0;/* live: set by JS every frame, used by blots */
+
+  --paper-fleck: #C6C1AA;
+  --hairline: rgba(34, 31, 26, 0.18);
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-mono: "Space Mono", "Courier New", monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--ink-text);
+  font-family: var(--font-mono);
+  overflow: hidden;
+  position: relative;
+  transition: color 0.4s ease;
+}
+
+/* ---------- paper grain, laid over everything ---------- */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: multiply;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 2px, rgba(34,31,26,0.015) 2px 3px),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='0 0 0 0 0.13  0 0 0 0 0.12  0 0 0 0 0.1  0 0 0 0.5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: auto, 140px 140px;
+}
+
+/* ---------- ink blots, the signature element ----------
+   Five soft blobs drift and pulse behind the type area.
+   Their color, spread and speed track typing intensity. */
+.blot-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.blot {
+  position: absolute;
+  top: calc(50% + (var(--i) * 4%) - 8%);
+  left: calc(18% + (var(--i) * 16%));
+  width: 34vmax;
+  height: 34vmax;
+  transform: translate(-50%, -50%) scale(var(--blot-scale, 0.3));
+  border-radius: 42% 58% 61% 39% / 47% 41% 59% 53%;
+  background: radial-gradient(circle at 40% 40%, var(--ink-current), transparent 72%);
+  filter: blur(38px);
+  opacity: var(--blot-opacity, 0);
+  transition: opacity 0.6s ease;
+  animation: drift calc(18s + var(--i) * 3s) ease-in-out infinite;
+  animation-delay: calc(var(--i) * -3s);
+}
+
+@keyframes drift {
+  0%   { border-radius: 42% 58% 61% 39% / 47% 41% 59% 53%; }
+  33%  { border-radius: 58% 42% 39% 61% / 41% 53% 47% 59%; }
+  66%  { border-radius: 39% 61% 58% 42% / 53% 47% 41% 59%; }
+  100% { border-radius: 42% 58% 61% 39% / 47% 41% 59% 53%; }
+}
+
+/* ---------- HUD ---------- */
+.hud {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: clamp(20px, 4vw, 44px) clamp(20px, 5vw, 56px) 0;
+}
+
+.wordmark {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 4vw, 42px);
+  letter-spacing: 0.01em;
+  line-height: 0.9;
+}
+
+.wordmark-drop {
+  display: inline-block;
+  font-style: italic;
+  margin-left: 0.08em;
+  opacity: 0.62;
+}
+
+.stats {
+  text-align: right;
+  font-family: var(--font-mono);
+  line-height: 1.5;
+}
+
+.mood-label {
+  display: block;
+  font-size: 12px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.68;
+}
+
+.wpm {
+  display: block;
+  font-size: 22px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+.wpm em {
+  font-style: normal;
+  font-size: 12px;
+  font-weight: 400;
+  opacity: 0.6;
+  margin-left: 2px;
+}
+
+/* ---------- typing canvas ---------- */
+.canvas {
+  position: relative;
+  z-index: 10;
+  height: calc(100vh - 190px);
+  display: flex;
+  align-items: center;
+  padding: 0 clamp(20px, 6vw, 90px);
+}
+
+.type-area {
+  width: 100%;
+  height: 62%;
+  max-height: 420px;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: inherit;
+  caret-color: currentColor;
+  font-family: var(--font-mono);
+  font-size: clamp(18px, 2.6vw, 30px);
+  line-height: 1.6;
+  letter-spacing: 0.01em;
+}
+
+.type-area::placeholder {
+  color: currentColor;
+  opacity: 0.38;
+  font-style: normal;
+}
+
+/* thin baseline rules under the text block, like ruled paper,
+   only visible near the top of the field */
+.canvas::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  margin: auto;
+  width: calc(100% - clamp(40px, 12vw, 180px));
+  height: 62%;
+  max-height: 420px;
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(1.6em - 1px),
+    var(--hairline) calc(1.6em - 1px),
+    var(--hairline) 1.6em
+  );
+  opacity: 0.5;
+}
+
+/* ---------- tide bar, bottom edge ---------- */
+.tide {
+  position: fixed;
+  left: 0;
+  bottom: 40px;
+  z-index: 5;
+  height: 3px;
+  width: var(--tide-width, 0%);
+  background: var(--ink-current);
+  transition: width 0.15s linear;
+  opacity: 0.85;
+}
+
+/* ---------- footer ---------- */
+.foot {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px clamp(20px, 5vw, 56px) 18px;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+}
+
+kbd {
+  font-family: var(--font-mono);
+  border: 1px solid var(--hairline);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-size: 10px;
+}
+
+.foot-credit {
+  font-style: normal;
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  .hud { flex-direction: column; gap: 14px; }
+  .stats { text-align: left; }
+  .canvas { height: calc(100vh - 230px); padding: 0 20px; }
+  .foot { flex-direction: column; gap: 6px; align-items: flex-start; }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .blot { animation: none; }
+  .tide { transition: none; }
+}

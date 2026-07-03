@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mood Ink — a page that stains with your pace</title>
+<meta name="description" content="Type, and the page floods with ink at the speed of your hands. A vanilla JS mood board for your typing rhythm.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="blot-layer" aria-hidden="true">
+    <span class="blot" style="--i:0"></span>
+    <span class="blot" style="--i:1"></span>
+    <span class="blot" style="--i:2"></span>
+    <span class="blot" style="--i:3"></span>
+    <span class="blot" style="--i:4"></span>
+  </div>
+
+  <header class="hud">
+    <h1 class="wordmark">Mood<span class="wordmark-drop">Ink</span></h1>
+    <div class="stats">
+      <span class="mood-label" id="moodLabel">still</span>
+      <span class="wpm" id="wpmReadout">0 <em>wpm</em></span>
+    </div>
+  </header>
+
+  <main class="canvas">
+    <textarea
+      class="type-area"
+      id="typeArea"
+      spellcheck="false"
+      autocomplete="off"
+      autocapitalize="off"
+      placeholder="Start typing. The page is listening to your pace, not your words."
+    ></textarea>
+  </main>
+
+  <div class="tide" id="tide" aria-hidden="true"></div>
+
+  <footer class="foot">
+    <span>reset with <kbd>Esc</kbd></span>
+    <span class="foot-credit">© Mood Ink — RT Dev </span>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
