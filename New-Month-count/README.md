@@ -2,7 +2,7 @@
 
 A simple and elegant **Countdown Timer Web App** that displays the remaining time (Days, Hours, Minutes, Seconds) until the start of the next month.
 
-🚀 Built using **HTML, CSS, and JavaScript**
+🚀 Built using *HTML, CSS, and JavaScript**
 
 ---
 
