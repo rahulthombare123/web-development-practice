@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login & Sign Up - Modern Design</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h2 id="formTitle">Welcome Back</h2>
+            <p id="formSubtitle">Sign in to your account</p>
+        </div>
+
+        <div class="form-toggle">
+            <button class="toggle-btn active" onclick="toggleForm('login')">Login</button>
+            <button class="toggle-btn" onclick="toggleForm('signup')">Sign Up</button>
+        </div>
+
+        <!-- Success Message -->
+        <div class="success-message" id="successMessage"></div>
+
+        <!-- Login Form -->
+        <form class="form active" id="loginForm">
+            <div class="input-group">
+                <label for="loginEmail">Email Address</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="loginEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="error-message" id="loginEmailError">Please enter a valid email address</div>
+            </div>
+
+            <div class="input-group">
+                <label for="loginPassword">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" required>
+                    <i class="fas fa-eye password-toggle" onclick="togglePassword('loginPassword', this)"></i>
+                </div>
+                <div class="error-message" id="loginPasswordError">Password is required</div>
+            </div>
+
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe">
+                    Remember me
+                </label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="submit-btn" id="loginSubmitBtn">Sign In</button>
+        </form>
+
+        <!-- Sign Up Form -->
+        <form class="form" id="signupForm">
+            <div class="input-group">
+                <label for="signupName">Full Name</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="signupName" placeholder="Enter your full name" required>
+                </div>
+                <div class="error-message" id="signupNameError">Please enter your full name</div>
+            </div>
+
+            <div class="input-group">
+                <label for="signupEmail">Email Address</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="signupEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="error-message" id="signupEmailError">Please enter a valid email address</div>
+            </div>
+
+            <div class="input-group">
+                <label for="signupPassword">Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="signupPassword" placeholder="Create a password" required>
+                    <i class="fas fa-eye password-toggle" onclick="togglePassword('signupPassword', this)"></i>
+                </div>
+                <div class="error-message" id="signupPasswordError">Password must be at least 8 characters</div>
+            </div>
+
+            <div class="input-group">
+                <label for="signupConfirmPassword">Confirm Password</label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="signupConfirmPassword" placeholder="Confirm your password" required>
+                    <i class="fas fa-eye password-toggle" onclick="togglePassword('signupConfirmPassword', this)"></i>
+                </div>
+                <div class="error-message" id="signupConfirmPasswordError">Passwords do not match</div>
+            </div>
+
+            <button type="submit" class="submit-btn" id="signupSubmitBtn">Create Account</button>
+        </form>
+
+        <!-- Social Login -->
+        <div class="social-login">
+            <p>Or continue with</p>
+            <div class="social-icons">
+                <a href="#" class="social-icon" title="Google">
+                    <i class="fab fa-google"></i>
+                </a>
+                <a href="#" class="social-icon" title="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+                <a href="#" class="social-icon" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-icon" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
