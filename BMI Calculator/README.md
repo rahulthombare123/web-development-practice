@@ -79,26 +79,7 @@ To use one:
      background-position: center;
    }
    ```
-   The gradient overlay keeps text readable on top of the photo.
-
-> Avoid hotlinking images directly from Unsplash/Pexels/Google search
-> results — URLs can change or break. Always download and host your own copy.
-
-## Deploying (free hosting)
-
-- **GitHub Pages** — push this folder to a GitHub repo, then enable Pages
-  in repo Settings → Pages → deploy from the `main` branch.
-- **Netlify** — drag and drop this folder onto https://app.netlify.com/drop
-- **Vercel** — `vercel deploy` from inside this folder (after `npm i -g vercel`)
-
-## Adding Google AdSense
-
-1. Get your site live on a real domain first (AdSense doesn't work on
-   `file://` pages).
-2. Apply at https://adsense.google.com — approval is easier with the
-   written content sections already included (What is BMI, FAQ, etc.).
-3. Once approved, replace the contents of each `<div class="ad-slot">`
-   in `index.html` with your AdSense `<ins>` ad unit code.
+   The gradient overlay keeps text readable on top of the photo
 
 ## Privacy & disclaimer
 
