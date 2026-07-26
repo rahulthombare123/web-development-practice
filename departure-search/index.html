@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Departure Search — Split-Flap Autosuggest</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="board-wrap">
+    <div class="board" id="board">
+
+      <div class="board-header">
+        <div class="board-title">
+          <span class="board-title__main">DEPARTURES</span>
+          <span class="board-title__sub">Destination Search</span>
+        </div>
+        <div class="board-clock" id="clock" aria-hidden="true">--:--:--</div>
+      </div>
+
+      <div class="search-row">
+        <label for="destination-input" class="search-label">DESTINATION</label>
+        <input
+          type="text"
+          id="destination-input"
+          class="search-input"
+          placeholder="TYPE A CITY, COUNTRY OR CODE"
+          autocomplete="off"
+          spellcheck="false"
+          aria-autocomplete="list"
+          aria-controls="flapBoard"
+          aria-expanded="false"
+        >
+      </div>
+
+      <div class="column-labels" aria-hidden="true">
+        <span class="col col--code">CODE</span>
+        <span class="col col--city">CITY</span>
+        <span class="col col--country">COUNTRY</span>
+      </div>
+
+      <ul class="flap-board" id="flapBoard" role="listbox" aria-label="Destination suggestions">
+        <!-- rows injected by script.js -->
+      </ul>
+
+      <p class="status-line" id="statusLine" aria-live="polite">Showing popular destinations</p>
+
+    </div>
+  </main>
+
+<script src="script.js"></script>
+</body>
+</html>

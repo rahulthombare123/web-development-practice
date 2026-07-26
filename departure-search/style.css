@@ -1,0 +1,296 @@
+/* ============================================
+   DEPARTURE SEARCH — split-flap autosuggest
+   Design tokens
+   ============================================ */
+:root {
+  --page-bg: #050708;
+  --board-bg: #0d1015;
+  --board-border: #1c2129;
+
+  --flap-top: #1c2028;
+  --flap-bottom: #12151b;
+  --flap-text: #eef1f5;
+  --flap-crease: rgba(0, 0, 0, 0.55);
+
+  --muted: #6b7480;
+  --accent: #38c9c2;
+  --accent-dim: rgba(56, 201, 194, 0.14);
+  --danger: #e0685a;
+
+  --font-display: 'Space Mono', 'Courier New', monospace;
+  --font-ui: 'Inter', system-ui, sans-serif;
+
+  --cell-w: 20px;
+  --cell-h: 30px;
+  --group-gap: 14px;
+}
+
+@media (max-width: 560px) {
+  :root {
+    --cell-w: 14px;
+    --cell-h: 22px;
+    --group-gap: 8px;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background: var(--page-bg);
+  background-image:
+    radial-gradient(ellipse at 50% 0%, rgba(56, 201, 194, 0.06), transparent 60%);
+  font-family: var(--font-ui);
+  color: var(--flap-text);
+}
+
+.board-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 16px;
+}
+
+/* ============================================
+   Board shell
+   ============================================ */
+.board {
+  width: 100%;
+  max-width: 640px;
+  background: var(--board-bg);
+  border: 1px solid var(--board-border);
+  border-radius: 6px;
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  padding: 22px 24px 20px;
+}
+
+.board-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--board-border);
+  padding-bottom: 14px;
+  margin-bottom: 18px;
+}
+
+.board-title__main {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.12em;
+  color: var(--flap-text);
+}
+
+.board-title__sub {
+  display: block;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--muted);
+  letter-spacing: 0.06em;
+  margin-top: 2px;
+}
+
+.board-clock {
+  font-family: var(--font-display);
+  font-size: 14px;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+/* ============================================
+   Search input
+   ============================================ */
+.search-row {
+  margin-bottom: 18px;
+}
+
+.search-label {
+  display: block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.search-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid var(--board-border);
+  color: var(--flap-text);
+  font-family: var(--font-display);
+  font-size: clamp(16px, 4vw, 20px);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 8px 2px 10px;
+  caret-color: var(--accent);
+  transition: border-color 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+.search-input:focus {
+  outline: none;
+  border-bottom-color: var(--accent);
+}
+
+/* ============================================
+   Column headers
+   ============================================ */
+.column-labels {
+  display: flex;
+  gap: var(--group-gap);
+  margin-bottom: 8px;
+  padding-left: 2px;
+}
+
+.column-labels .col {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--muted);
+}
+
+.col--code   { width: calc(var(--cell-w) * 3); }
+.col--city   { width: calc(var(--cell-w) * 12); }
+.col--country{ width: calc(var(--cell-w) * 12); }
+
+/* ============================================
+   Flap board
+   ============================================ */
+.flap-board {
+  list-style: none;
+  margin: 0 0 10px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+}
+
+.flap-row {
+  display: flex;
+  gap: var(--group-gap);
+  padding: 4px 6px;
+  border-radius: 3px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: background 0.15s ease, border-color 0.15s ease, opacity 0.2s ease;
+}
+
+.flap-row:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.flap-row.active {
+  background: var(--accent-dim);
+  border-left-color: var(--accent);
+}
+
+.flap-row[data-has-data="false"] {
+  opacity: 0.28;
+  cursor: default;
+}
+
+.flap-group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Flap cell — the character-level flip unit
+   ============================================ */
+.flap-cell {
+  position: relative;
+  width: var(--cell-w);
+  height: var(--cell-h);
+  flex-shrink: 0;
+  perspective: 160px;
+}
+
+.flap-face {
+  position: absolute;
+  inset: 1px 1px 1px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, var(--flap-top) 0%, var(--flap-top) 49%, var(--flap-bottom) 51%, var(--flap-bottom) 100%);
+  color: var(--flap-text);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: calc(var(--cell-w) * 0.62);
+  border-radius: 2px;
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* static crease line, sells the two-leaf look at rest */
+.flap-cell::after {
+  content: '';
+  position: absolute;
+  left: 1px;
+  right: 1px;
+  top: 50%;
+  height: 1px;
+  background: var(--flap-crease);
+  z-index: 2;
+  pointer-events: none;
+}
+
+@keyframes flapDown {
+  0%   { transform: rotateX(0deg); }
+  48%  { transform: rotateX(-90deg); }
+  52%  { transform: rotateX(-90deg); }
+  100% { transform: rotateX(0deg); }
+}
+
+.flap-cell.flipping .flap-face {
+  animation: flapDown 0.24s ease-in-out;
+}
+
+/* ============================================
+   Status line
+   ============================================ */
+.status-line {
+  margin: 4px 2px 0;
+  font-size: 12px;
+  color: var(--muted);
+  min-height: 16px;
+}
+
+.status-line.confirmed {
+  color: var(--accent);
+}
+
+.status-line.empty {
+  color: var(--danger);
+}
+
+/* ============================================
+   Accessibility
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .flap-cell.flipping .flap-face {
+    animation: none;
+  }
+  .flap-row, .search-input {
+    transition: none;
+  }
+}
+
+.search-input:focus-visible,
+.flap-row:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
