@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Study Timetable Creator – plan your weekly study schedule, save it locally, and load ready-made templates in seconds." />
+  <title>Study Timetable Creator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ───────────────── HEADER ───────────────── -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand">
+        <span class="brand-icon">📚</span>
+        <span class="brand-name">StudyBoard</span>
+      </div>
+      <div class="header-actions">
+        <button id="btn-template" class="btn btn-ghost" title="Load a ready-made template">Templates</button>
+        <button id="btn-clear"    class="btn btn-danger-ghost" title="Clear current timetable">Clear All</button>
+        <button id="btn-save"     class="btn btn-primary" title="Save to browser storage">💾 Save</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ───────────────── HERO ───────────────── -->
+  <section class="hero">
+    <h1 class="hero-title">Plan Your <span class="gradient-text">Study Week</span></h1>
+    <p class="hero-sub">Click any cell to add or edit a subject. Your timetable auto-saves in your browser.</p>
+  </section>
+
+  <!-- ───────────────── TIMETABLE ───────────────── -->
+  <main class="main-content">
+
+    <!-- Controls row -->
+    <div class="controls-row">
+      <div class="input-group">
+        <label for="timetable-name">Timetable Name</label>
+        <input id="timetable-name" type="text" placeholder="e.g. Semester 1 Plan" maxlength="40" />
+      </div>
+      <div class="save-status" id="save-status">Not saved yet</div>
+    </div>
+
+    <!-- Colour legend -->
+    <div class="legend" id="color-legend">
+      <span class="legend-label">Subject colours:</span>
+      <div class="legend-chips" id="legend-chips"></div>
+    </div>
+
+    <!-- The grid -->
+    <div class="table-wrapper">
+      <table class="timetable" id="timetable">
+        <thead>
+          <tr id="header-row">
+            <th class="corner-cell">Time \ Day</th>
+            <!-- day headers injected by JS -->
+          </tr>
+        </thead>
+        <tbody id="timetable-body">
+          <!-- rows injected by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Stats bar -->
+    <div class="stats-bar" id="stats-bar">
+      <div class="stat" id="stat-filled">Filled: 0</div>
+      <div class="stat" id="stat-hours">Hours/week: 0 h</div>
+      <div class="stat" id="stat-subjects">Subjects: 0</div>
+    </div>
+
+  </main>
+
+  <!-- ───────────────── CELL EDITOR MODAL ───────────────── -->
+  <div class="modal-overlay" id="cell-modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading">
+    <div class="modal">
+      <h2 id="modal-heading" class="modal-title">Edit Slot</h2>
+      <p class="modal-meta" id="modal-meta"></p>
+
+      <label for="cell-subject">Subject / Activity</label>
+      <input id="cell-subject" type="text" placeholder="e.g. Mathematics" maxlength="30" autocomplete="off" />
+
+      <label for="cell-color">Colour</label>
+      <div class="color-picker-row" id="color-picker-row">
+        <!-- colour swatches injected by JS -->
+      </div>
+
+      <label for="cell-note">Note (optional)</label>
+      <input id="cell-note" type="text" placeholder="e.g. Chapter 3 revision" maxlength="50" autocomplete="off" />
+
+      <div class="modal-actions">
+        <button id="modal-clear-slot" class="btn btn-danger-ghost">Clear Slot</button>
+        <button id="modal-cancel"     class="btn btn-ghost">Cancel</button>
+        <button id="modal-save"       class="btn btn-primary">Save Slot</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────────── TEMPLATES MODAL ───────────────── -->
+  <div class="modal-overlay" id="template-modal" role="dialog" aria-modal="true" aria-labelledby="tmpl-heading">
+    <div class="modal modal-wide">
+      <h2 id="tmpl-heading" class="modal-title">Ready-Made Templates</h2>
+      <p class="modal-sub">Choose a template to instantly load a sample timetable.</p>
+      <div class="template-grid" id="template-grid">
+        <!-- cards injected by JS -->
+      </div>
+      <div class="modal-actions">
+        <button id="tmpl-cancel" class="btn btn-ghost">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───────────────── TOAST ───────────────── -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
