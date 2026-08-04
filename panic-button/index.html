@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panic Button 🔴 — Try To Click It</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <div class="noise-overlay"></div>
+
+  <main class="stage">
+    <header class="stage__header">
+      <p class="stage__eyebrow">EXPERIMENT NO. 07</p>
+      <h1 class="stage__title">THE PANIC BUTTON</h1>
+      <p class="stage__subtitle">It knows you're trying to click it. Good luck.</p>
+    </header>
+
+    <section class="arena" id="arena">
+      <div class="arena__grid"></div>
+
+      <button class="panic-btn" id="panicBtn">
+        <span class="panic-btn__label" id="btnLabel">CLICK ME</span>
+      </button>
+
+      <div class="stat-panel">
+        <div class="stat">
+          <span class="stat__value" id="dodgeCount">0</span>
+          <span class="stat__label">Dodges</span>
+        </div>
+        <div class="stat">
+          <span class="stat__value" id="panicLevel">CALM</span>
+          <span class="stat__label">Panic Level</span>
+        </div>
+      </div>
+    </section>
+
+    <footer class="stage__footer">
+      <p id="taunt">It hasn't even noticed you yet.</p>
+    </footer>
+  </main>
+
+  <div class="win-overlay" id="winOverlay">
+    <div class="win-card">
+      <h2>🎉 YOU ACTUALLY CAUGHT IT</h2>
+      <p id="winMessage">Respect. Most people rage quit.</p>
+      <button class="win-card__btn" id="restartBtn">Do It Again</button>
+    </div>
+  </div>
+
+  <canvas id="confettiCanvas"></canvas>
+
+  <script src="script.js"></script>
+</body>
+</html>
